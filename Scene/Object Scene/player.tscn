@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://cdp1ti4scnxv"]
+
+[ext_resource type="Texture2D" uid="uid://g7ckjnsuvvai" path="res://Asset/Sprite/_Player.png" id="1_ipv65"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_47uve"]
+size = Vector2(24, 6)
+
+[node name="Player" type="RigidBody2D"]
+
+[node name="Player" type="Sprite2D" parent="."]
+texture = ExtResource("1_ipv65")
+
+[node name="Player Collider" type="CollisionShape2D" parent="."]
+position = Vector2(1, 2)
+shape = SubResource("RectangleShape2D_47uve")
