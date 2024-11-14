@@ -1,3 +1,22 @@
-[gd_scene format=3 uid="uid://xm5ntgfadppk"]
+[gd_scene load_steps=3 format=3 uid="uid://xm5ntgfadppk"]
+
+[ext_resource type="PackedScene" uid="uid://cdp1ti4scnxv" path="res://Scene/Object Scene/player.tscn" id="1_7koso"]
+[ext_resource type="PackedScene" uid="uid://dn3agaji7lkcb" path="res://Scene/Object Scene/box.tscn" id="2_0cf8b"]
 
 [node name="Level" type="Node2D"]
+
+[node name="Player" parent="." instance=ExtResource("1_7koso")]
+
+[node name="Camera2D" type="Camera2D" parent="Player"]
+position = Vector2(128, 0)
+zoom = Vector2(2, 2)
+position_smoothing_enabled = true
+
+[node name="Box" parent="." instance=ExtResource("2_0cf8b")]
+position = Vector2(72, 64)
+
+[node name="Box2" parent="." instance=ExtResource("2_0cf8b")]
+position = Vector2(248, -16)
+
+[node name="Box3" parent="." instance=ExtResource("2_0cf8b")]
+position = Vector2(424, 64)
