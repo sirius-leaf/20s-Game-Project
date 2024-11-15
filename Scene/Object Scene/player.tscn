@@ -9,7 +9,6 @@ size = Vector2(24, 6)
 [node name="Player" type="RigidBody2D"]
 gravity_scale = 0.0
 linear_damp = 8.0
-constant_force = Vector2(3000, 0)
 script = ExtResource("1_bs74l")
 playerMoveSpeed = 2000.0
 

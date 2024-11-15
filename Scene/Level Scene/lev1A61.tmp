@@ -6,7 +6,6 @@
 [ext_resource type="Script" path="res://Script/spawner.gd" id="3_ln7un"]
 
 [node name="Level" type="Node2D"]
-position = Vector2(88, 8)
 
 [node name="Player" parent="." instance=ExtResource("1_7koso")]
 position = Vector2(128, 0)
