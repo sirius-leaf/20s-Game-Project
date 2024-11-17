@@ -1,0 +1,30 @@
+[gd_scene load_steps=3 format=3 uid="uid://rfgu1kbc2oqs"]
+
+[ext_resource type="Script" path="res://Script/timer_label.gd" id="1_o3ofi"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_nays6"]
+font_size = 72
+
+[node name="UI Canvas" type="CanvasLayer"]
+
+[node name="UI" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Timer Label" type="Label" parent="UI"]
+layout_mode = 0
+offset_left = 16.0
+offset_top = 16.0
+offset_right = 744.0
+offset_bottom = 128.0
+text = "20
+"
+label_settings = SubResource("LabelSettings_nays6")
+script = ExtResource("1_o3ofi")
+
+[node name="Timer" type="Timer" parent="UI/Timer Label"]
+wait_time = 20.0
+one_shot = true
+autostart = true

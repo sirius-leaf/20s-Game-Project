@@ -1,22 +1,57 @@
-[gd_scene load_steps=3 format=3 uid="uid://xm5ntgfadppk"]
+[gd_scene load_steps=9 format=3 uid="uid://xm5ntgfadppk"]
 
 [ext_resource type="PackedScene" uid="uid://cdp1ti4scnxv" path="res://Scene/Object Scene/player.tscn" id="1_7koso"]
-[ext_resource type="PackedScene" uid="uid://dn3agaji7lkcb" path="res://Scene/Object Scene/box.tscn" id="2_0cf8b"]
+[ext_resource type="Script" path="res://Script/floor.gd" id="3_3x54j"]
+[ext_resource type="Texture2D" uid="uid://d2b0sc40y3hsr" path="res://Asset/Sprite/Just a box.png" id="3_a8qrf"]
+[ext_resource type="PackedScene" uid="uid://rfgu1kbc2oqs" path="res://Scene/Object Scene/ui_canvas.tscn" id="3_bliyl"]
+[ext_resource type="PackedScene" uid="uid://c75g0e0cye3ht" path="res://Scene/Object Scene/Rooms/rooms.tscn" id="5_12r7k"]
+[ext_resource type="Script" path="res://Script/Spawner/room_spawner.gd" id="6_fpyby"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_guawl"]
+size = Vector2(768, 392)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ihor8"]
+size = Vector2(768, 384)
 
 [node name="Level" type="Node2D"]
 
 [node name="Player" parent="." instance=ExtResource("1_7koso")]
-
-[node name="Camera2D" type="Camera2D" parent="Player"]
 position = Vector2(128, 0)
-zoom = Vector2(2, 2)
+
+[node name="Player Camera" type="Camera2D" parent="Player"]
+zoom = Vector2(0.5, 0.5)
 position_smoothing_enabled = true
 
-[node name="Box" parent="." instance=ExtResource("2_0cf8b")]
-position = Vector2(72, 64)
+[node name="UI Canvas" parent="." instance=ExtResource("3_bliyl")]
 
-[node name="Box2" parent="." instance=ExtResource("2_0cf8b")]
-position = Vector2(248, -16)
+[node name="Floor" type="RigidBody2D" parent="."]
+freeze = true
+freeze_mode = 1
+script = ExtResource("3_3x54j")
 
-[node name="Box3" parent="." instance=ExtResource("2_0cf8b")]
-position = Vector2(424, 64)
+[node name="JustABox" type="Sprite2D" parent="Floor"]
+modulate = Color(0, 0, 0, 1)
+position = Vector2(3.05176e-05, 452)
+scale = Vector2(24, 12.25)
+texture = ExtResource("3_a8qrf")
+
+[node name="Floor Collider" type="CollisionShape2D" parent="Floor"]
+position = Vector2(0, 452)
+shape = SubResource("RectangleShape2D_guawl")
+
+[node name="JustABox2" type="Sprite2D" parent="Floor"]
+modulate = Color(0, 0, 0, 1)
+position = Vector2(0, -448)
+scale = Vector2(24, 12)
+texture = ExtResource("3_a8qrf")
+
+[node name="Floor Collider2" type="CollisionShape2D" parent="Floor"]
+position = Vector2(0, -448)
+shape = SubResource("RectangleShape2D_ihor8")
+
+[node name="Room Spawner" type="Marker2D" parent="."]
+position = Vector2(768, 0)
+script = ExtResource("6_fpyby")
+roomsScene = ExtResource("5_12r7k")
+
+[node name="Timer" type="Timer" parent="Room Spawner"]

@@ -1,0 +1,24 @@
+[gd_scene load_steps=5 format=3 uid="uid://xm5ntgfadppk"]
+
+[ext_resource type="PackedScene" uid="uid://cdp1ti4scnxv" path="res://Scene/Object Scene/player.tscn" id="1_7koso"]
+[ext_resource type="PackedScene" uid="uid://dn3agaji7lkcb" path="res://Scene/Object Scene/box.tscn" id="2_0cf8b"]
+[ext_resource type="PackedScene" uid="uid://rfgu1kbc2oqs" path="res://Scene/Object Scene/ui_canvas.tscn" id="3_bliyl"]
+[ext_resource type="Script" path="res://Script/spawner.gd" id="3_ln7un"]
+
+[node name="Level" type="Node2D"]
+
+[node name="Player" parent="." instance=ExtResource("1_7koso")]
+position = Vector2(128, 0)
+constant_force = Vector2(3000, 0)
+
+[node name="Player Camera" type="Camera2D" parent="Player"]
+position = Vector2(128, 0)
+zoom = Vector2(2, 2)
+position_smoothing_enabled = true
+
+[node name="Spawner" type="Marker2D" parent="."]
+position = Vector2(576, 0)
+script = ExtResource("3_ln7un")
+blockScene = ExtResource("2_0cf8b")
+
+[node name="UI Canvas" parent="." instance=ExtResource("3_bliyl")]
