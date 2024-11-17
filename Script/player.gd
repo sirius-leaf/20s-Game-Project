@@ -7,7 +7,12 @@ func _process(delta):
 	var moveInput := Vector2(Input.get_axis("ui_left", "ui_right"), Input.get_axis("ui_up", "ui_down"))
 	
 	# move the player
-	apply_central_force(moveInput * playerMoveSpeed)
+	if moveInput:
+		apply_central_force(moveInput * playerMoveSpeed)
+	
+	# restart scene
+	if Input.is_action_just_pressed("ui_restart"):
+		get_tree().reload_current_scene()
 	
 	# rotate player to match move direction
-	rotation = atan2(linear_velocity.y, linear_velocity.x)
+	rotation_degrees = linear_velocity.x / 400 * 30

@@ -1,20 +1,25 @@
-[gd_scene load_steps=4 format=3 uid="uid://cdp1ti4scnxv"]
+[gd_scene load_steps=5 format=3 uid="uid://cdp1ti4scnxv"]
 
 [ext_resource type="Script" path="res://Script/player.gd" id="1_bs74l"]
 [ext_resource type="Texture2D" uid="uid://g7ckjnsuvvai" path="res://Asset/Sprite/_Player.png" id="1_ipv65"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_47uve"]
-size = Vector2(24, 6)
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_jvl48"]
+friction = 0.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_1y7gb"]
+radius = 3.0
 
 [node name="Player" type="RigidBody2D"]
+physics_material_override = SubResource("PhysicsMaterial_jvl48")
 gravity_scale = 0.0
 linear_damp = 8.0
 script = ExtResource("1_bs74l")
-playerMoveSpeed = 2000.0
+playerMoveSpeed = 3000.0
 
 [node name="Player" type="Sprite2D" parent="."]
 texture = ExtResource("1_ipv65")
 
 [node name="Player Collider" type="CollisionShape2D" parent="."]
-position = Vector2(1, 2)
-shape = SubResource("RectangleShape2D_47uve")
+position = Vector2(0, 2)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_1y7gb")

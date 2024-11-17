@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://dbmlqenujgbys"]
+
+[ext_resource type="Script" path="res://Script/Editor Only/reset_scene.gd" id="1_1vxoq"]
+
+[node name="Scene Resetter" type="Node2D"]
+script = ExtResource("1_1vxoq")

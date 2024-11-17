@@ -1,0 +1,719 @@
+[gd_scene load_steps=27 format=3 uid="uid://c75g0e0cye3ht"]
+
+[ext_resource type="Texture2D" uid="uid://d2b0sc40y3hsr" path="res://Asset/Sprite/Just a box.png" id="1_c1t8q"]
+[ext_resource type="PackedScene" uid="uid://dbmlqenujgbys" path="res://Scene/Editor Tool/scene_resetter.tscn" id="1_ji8ic"]
+[ext_resource type="Script" path="res://Script/Room/room1.gd" id="2_afldu"]
+[ext_resource type="Script" path="res://Script/Room/room3.gd" id="3_pah2p"]
+[ext_resource type="Script" path="res://Script/Room/block_movement.gd" id="3_pxysl"]
+[ext_resource type="Script" path="res://Script/Room/rotating_block.gd" id="6_mi8f3"]
+[ext_resource type="Script" path="res://Script/Room/room8.gd" id="7_g5sip"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_74olo"]
+size = Vector2(768, 128)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ho3an"]
+size = Vector2(512, 512)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_itlyt"]
+size = Vector2(640, 256)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jhdee"]
+size = Vector2(128, 128)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_q3d2b"]
+size = Vector2(384, 384)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_slbmp"]
+size = Vector2(64, 448)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_oumar"]
+size = Vector2(32, 192)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7mjuf"]
+size = Vector2(32, 320)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_34iiv"]
+size = Vector2(64, 32)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xt1rp"]
+size = Vector2(256, 256)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_uwxyc"]
+size = Vector2(256, 128)
+
+[sub_resource type="Animation" id="Animation_8s4pf"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-192, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_j6u55"]
+resource_name = "move_1"
+length = 3.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(-192, 0), Vector2(192, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_uklwv"]
+resource_name = "move_2"
+length = 3.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(192, 0), Vector2(-192, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_s8522"]
+_data = {
+"RESET": SubResource("Animation_8s4pf"),
+"move_1": SubResource("Animation_j6u55"),
+"move_2": SubResource("Animation_uklwv")
+}
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_11wln"]
+size = Vector2(224, 32)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_tchou"]
+size = Vector2(96, 32)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_stllw"]
+size = Vector2(32, 160)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bciwm"]
+size = Vector2(128, 512)
+
+[node name="Rooms" type="Node2D"]
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(384, 2048)
+
+[node name="Scene Resetter" parent="Camera2D" instance=ExtResource("1_ji8ic")]
+
+[node name="Empty Room" type="Node2D" parent="."]
+
+[node name="Floor" type="StaticBody2D" parent="Empty Room"]
+position = Vector2(0, 256)
+
+[node name="JustABox" type="Sprite2D" parent="Empty Room/Floor"]
+modulate = Color(0, 0, 0, 1)
+position = Vector2(384, 64)
+scale = Vector2(24, 4)
+texture = ExtResource("1_c1t8q")
+
+[node name="Floor Collider" type="CollisionShape2D" parent="Empty Room/Floor"]
+position = Vector2(384, 64)
+shape = SubResource("RectangleShape2D_74olo")
+
+[node name="JustABox2" type="Sprite2D" parent="Empty Room/Floor"]
+modulate = Color(0, 0, 0, 1)
+position = Vector2(384, -576)
+scale = Vector2(24, 4)
+texture = ExtResource("1_c1t8q")
+
+[node name="Floor Collider2" type="CollisionShape2D" parent="Empty Room/Floor"]
+position = Vector2(384, -576)
+shape = SubResource("RectangleShape2D_74olo")
+
+[node name="Room1" type="Node2D" parent="."]
+position = Vector2(832, 0)
+script = ExtResource("2_afldu")
+
+[node name="Wall" type="StaticBody2D" parent="Room1"]
+position = Vector2(384, 0)
+
+[node name="JustABox" type="Sprite2D" parent="Room1/Wall"]
+modulate = Color(0, 0, 0, 1)
+position = Vector2(0, 320)
+scale = Vector2(16, 16)
+texture = ExtResource("1_c1t8q")
+
+[node name="Floor Collider" type="CollisionShape2D" parent="Room1/Wall"]
+position = Vector2(0, 320)
+shape = SubResource("RectangleShape2D_ho3an")
+
+[node name="JustABox2" type="Sprite2D" parent="Room1/Wall"]
+modulate = Color(0, 0, 0, 1)
+position = Vector2(0, -320)
+scale = Vector2(16, 16)
+texture = ExtResource("1_c1t8q")
+
+[node name="Floor Collider2" type="CollisionShape2D" parent="Room1/Wall"]
+position = Vector2(0, -320)
+shape = SubResource("RectangleShape2D_ho3an")
+
+[node name="Room2" type="Node2D" parent="."]
+position = Vector2(1664, 0)
+
+[node name="Floor" type="StaticBody2D" parent="Room2"]
+position = Vector2(0, 256)
+
+[node name="JustABox3" type="Sprite2D" parent="Room2/Floor"]
+modulate = Color(0, 0, 0, 1)
+position = Vector2(384, -256)
+scale = Vector2(20, 8)
+texture = ExtResource("1_c1t8q")
+
+[node name="Floor Collider3" type="CollisionShape2D" parent="Room2/Floor"]
+position = Vector2(384, -256)
+shape = SubResource("RectangleShape2D_itlyt")
+
+[node name="Room3" type="Node2D" parent="."]
+position = Vector2(2496, 0)
+script = ExtResource("3_pah2p")
+
+[node name="Moving Block" type="Node2D" parent="Room3"]
+position = Vector2(224, 0)
+
+[node name="Block" type="RigidBody2D" parent="Room3/Moving Block"]
+position = Vector2(0, -384)
+freeze = true
+freeze_mode = 1
+constant_force = Vector2(0, 100)
+script = ExtResource("3_pxysl")
+
+[node name="JustABox" type="Sprite2D" parent="Room3/Moving Block/Block"]
+modulate = Color(0, 0, 0, 1)
+scale = Vector2(4, 4)
+texture = ExtResource("1_c1t8q")
+
+[node name="Floor Collider" type="CollisionShape2D" parent="Room3/Moving Block/Block"]
+shape = SubResource("RectangleShape2D_jhdee")
+
+[node name="Block2" type="RigidBody2D" parent="Room3/Moving Block"]
+position = Vector2(0, -128)
+freeze = true
+freeze_mode = 1
+constant_force = Vector2(0, 100)
+script = ExtResource("3_pxysl")
+
+[node name="JustABox" type="Sprite2D" parent="Room3/Moving Block/Block2"]
+modulate = Color(0, 0, 0, 1)
+scale = Vector2(4, 4)
+texture = ExtResource("1_c1t8q")
+
+[node name="Floor Collider" type="CollisionShape2D" parent="Room3/Moving Block/Block2"]
+shape = SubResource("RectangleShape2D_jhdee")
+
+[node name="Block3" type="RigidBody2D" parent="Room3/Moving Block"]
+position = Vector2(0, 128)
+freeze = true
+freeze_mode = 1
+constant_force = Vector2(0, 100)
+script = ExtResource("3_pxysl")
+
+[node name="JustABox" type="Sprite2D" parent="Room3/Moving Block/Block3"]
+modulate = Color(0, 0, 0, 1)
+scale = Vector2(4, 4)
+texture = ExtResource("1_c1t8q")
+
+[node name="Floor Collider" type="CollisionShape2D" parent="Room3/Moving Block/Block3"]
+shape = SubResource("RectangleShape2D_jhdee")
+
+[node name="Moving Block2" type="Node2D" parent="Room3"]
+position = Vector2(544, 0)
+rotation = 3.14159
+
+[node name="Block" type="RigidBody2D" parent="Room3/Moving Block2"]
+position = Vector2(0, -384)
+freeze = true
+freeze_mode = 1
+constant_force = Vector2(0, 100)
+script = ExtResource("3_pxysl")
+posEnum = 1
+
+[node name="JustABox" type="Sprite2D" parent="Room3/Moving Block2/Block"]
+modulate = Color(0, 0, 0, 1)
+scale = Vector2(4, 4)
+texture = ExtResource("1_c1t8q")
+
+[node name="Floor Collider" type="CollisionShape2D" parent="Room3/Moving Block2/Block"]
+shape = SubResource("RectangleShape2D_jhdee")
+
+[node name="Block2" type="RigidBody2D" parent="Room3/Moving Block2"]
+position = Vector2(0, -128)
+freeze = true
+freeze_mode = 1
+constant_force = Vector2(0, 100)
+script = ExtResource("3_pxysl")
+posEnum = 1
+
+[node name="JustABox" type="Sprite2D" parent="Room3/Moving Block2/Block2"]
+modulate = Color(0, 0, 0, 1)
+scale = Vector2(4, 4)
+texture = ExtResource("1_c1t8q")
+
+[node name="Floor Collider" type="CollisionShape2D" parent="Room3/Moving Block2/Block2"]
+shape = SubResource("RectangleShape2D_jhdee")
+
+[node name="Block3" type="RigidBody2D" parent="Room3/Moving Block2"]
+position = Vector2(0, 128)
+freeze = true
+freeze_mode = 1
+constant_force = Vector2(0, 100)
+script = ExtResource("3_pxysl")
+posEnum = 1
+
+[node name="JustABox" type="Sprite2D" parent="Room3/Moving Block2/Block3"]
+modulate = Color(0, 0, 0, 1)
+scale = Vector2(4, 4)
+texture = ExtResource("1_c1t8q")
+
+[node name="Floor Collider" type="CollisionShape2D" parent="Room3/Moving Block2/Block3"]
+shape = SubResource("RectangleShape2D_jhdee")
+
+[node name="Room4" type="Node2D" parent="."]
+position = Vector2(3328, 0)
+script = ExtResource("2_afldu")
+roomNumber = 1
+
+[node name="Wall" type="StaticBody2D" parent="Room4"]
+position = Vector2(384, -256)
+rotation = 0.785398
+
+[node name="JustABox" type="Sprite2D" parent="Room4/Wall"]
+modulate = Color(0, 0, 0, 1)
+scale = Vector2(12, 12)
+texture = ExtResource("1_c1t8q")
+
+[node name="Floor Collider" type="CollisionShape2D" parent="Room4/Wall"]
+shape = SubResource("RectangleShape2D_q3d2b")
+
+[node name="Room5" type="Node2D" parent="."]
+position = Vector2(0, 1024)
+
+[node name="Rotating Block" type="RigidBody2D" parent="Room5"]
+position = Vector2(384, 0)
+freeze = true
+freeze_mode = 1
+script = ExtResource("6_mi8f3")
+
+[node name="JustABox" type="Sprite2D" parent="Room5/Rotating Block"]
+modulate = Color(0, 0, 0, 1)
+scale = Vector2(2, 14)
+texture = ExtResource("1_c1t8q")
+
+[node name="JustABox2" type="Sprite2D" parent="Room5/Rotating Block"]
+modulate = Color(0, 0, 0, 1)
+rotation = 1.5708
+scale = Vector2(2, 14)
+texture = ExtResource("1_c1t8q")
+
+[node name="Collider" type="CollisionShape2D" parent="Room5/Rotating Block"]
+shape = SubResource("RectangleShape2D_slbmp")
+
+[node name="Collider2" type="CollisionShape2D" parent="Room5/Rotating Block"]
+rotation = 1.5708
+shape = SubResource("RectangleShape2D_slbmp")
+
+[node name="Room6" type="Node2D" parent="."]
+position = Vector2(832, 1024)
+
+[node name="Wall" type="StaticBody2D" parent="Room6"]
+position = Vector2(96, 256)
+
+[node name="JustABox" type="Sprite2D" parent="Room6/Wall"]
+modulate = Color(0, 0, 0, 1)
+position = Vector2(16, -96)
+scale = Vector2(1, 6)
+texture = ExtResource("1_c1t8q")
+
+[node name="Floor Collider" type="CollisionShape2D" parent="Room6/Wall"]
+position = Vector2(16, -96)
+shape = SubResource("RectangleShape2D_oumar")
+
+[node name="JustABox2" type="Sprite2D" parent="Room6/Wall"]
+modulate = Color(0, 0, 0, 1)
+position = Vector2(16, -416)
+scale = Vector2(1, 6)
+texture = ExtResource("1_c1t8q")
+
+[node name="Floor Collider2" type="CollisionShape2D" parent="Room6/Wall"]
+position = Vector2(16, -416)
+shape = SubResource("RectangleShape2D_oumar")
+
+[node name="JustABox3" type="Sprite2D" parent="Room6/Wall"]
+modulate = Color(0, 0, 0, 1)
+position = Vector2(560, -416)
+scale = Vector2(1, 6)
+texture = ExtResource("1_c1t8q")
+
+[node name="Floor Collider3" type="CollisionShape2D" parent="Room6/Wall"]
+position = Vector2(560, -416)
+shape = SubResource("RectangleShape2D_oumar")
+
+[node name="JustABox4" type="Sprite2D" parent="Room6/Wall"]
+modulate = Color(0, 0, 0, 1)
+position = Vector2(560, -96)
+scale = Vector2(1, 6)
+texture = ExtResource("1_c1t8q")
+
+[node name="Floor Collider4" type="CollisionShape2D" parent="Room6/Wall"]
+position = Vector2(560, -96)
+shape = SubResource("RectangleShape2D_oumar")
+
+[node name="JustABox5" type="Sprite2D" parent="Room6/Wall"]
+modulate = Color(0, 0, 0, 1)
+position = Vector2(144, -256)
+scale = Vector2(1, 10)
+texture = ExtResource("1_c1t8q")
+
+[node name="Floor Collider5" type="CollisionShape2D" parent="Room6/Wall"]
+position = Vector2(144, -256)
+shape = SubResource("RectangleShape2D_7mjuf")
+
+[node name="JustABox6" type="Sprite2D" parent="Room6/Wall"]
+modulate = Color(0, 0, 0, 1)
+position = Vector2(432, -256)
+scale = Vector2(1, 10)
+texture = ExtResource("1_c1t8q")
+
+[node name="Floor Collider6" type="CollisionShape2D" parent="Room6/Wall"]
+position = Vector2(432, -256)
+shape = SubResource("RectangleShape2D_7mjuf")
+
+[node name="JustABox7" type="Sprite2D" parent="Room6/Wall"]
+modulate = Color(0, 0, 0, 1)
+position = Vector2(192, -400)
+scale = Vector2(2, 1)
+texture = ExtResource("1_c1t8q")
+
+[node name="Floor Collider7" type="CollisionShape2D" parent="Room6/Wall"]
+position = Vector2(192, -400)
+shape = SubResource("RectangleShape2D_34iiv")
+
+[node name="JustABox8" type="Sprite2D" parent="Room6/Wall"]
+modulate = Color(0, 0, 0, 1)
+position = Vector2(384, -400)
+scale = Vector2(2, 1)
+texture = ExtResource("1_c1t8q")
+
+[node name="Floor Collider8" type="CollisionShape2D" parent="Room6/Wall"]
+position = Vector2(384, -400)
+shape = SubResource("RectangleShape2D_34iiv")
+
+[node name="JustABox9" type="Sprite2D" parent="Room6/Wall"]
+modulate = Color(0, 0, 0, 1)
+position = Vector2(384, -112)
+scale = Vector2(2, 1)
+texture = ExtResource("1_c1t8q")
+
+[node name="Floor Collider9" type="CollisionShape2D" parent="Room6/Wall"]
+position = Vector2(384, -112)
+shape = SubResource("RectangleShape2D_34iiv")
+
+[node name="JustABox10" type="Sprite2D" parent="Room6/Wall"]
+modulate = Color(0, 0, 0, 1)
+position = Vector2(192, -112)
+scale = Vector2(2, 1)
+texture = ExtResource("1_c1t8q")
+
+[node name="Floor Collider10" type="CollisionShape2D" parent="Room6/Wall"]
+position = Vector2(192, -112)
+shape = SubResource("RectangleShape2D_34iiv")
+
+[node name="Room7" type="Node2D" parent="."]
+position = Vector2(1664, 1024)
+
+[node name="Floor3" type="StaticBody2D" parent="Room7"]
+position = Vector2(384, 0)
+
+[node name="JustABox" type="Sprite2D" parent="Room7/Floor3"]
+modulate = Color(0, 0, 0, 1)
+scale = Vector2(8, 8)
+texture = ExtResource("1_c1t8q")
+
+[node name="Floor Collider" type="CollisionShape2D" parent="Room7/Floor3"]
+shape = SubResource("RectangleShape2D_xt1rp")
+
+[node name="Room8" type="Node2D" parent="."]
+position = Vector2(2496, 1024)
+script = ExtResource("7_g5sip")
+
+[node name="Timer" type="Timer" parent="Room8"]
+
+[node name="Moving Block" type="Node2D" parent="Room8"]
+position = Vector2(384, -128)
+
+[node name="Block" type="RigidBody2D" parent="Room8/Moving Block"]
+position = Vector2(-192, 0)
+freeze = true
+freeze_mode = 1
+
+[node name="JustABox" type="Sprite2D" parent="Room8/Moving Block/Block"]
+modulate = Color(0, 0, 0, 1)
+position = Vector2(-3.05176e-05, 0)
+scale = Vector2(8, 4)
+texture = ExtResource("1_c1t8q")
+
+[node name="Floor Collider" type="CollisionShape2D" parent="Room8/Moving Block/Block"]
+shape = SubResource("RectangleShape2D_uwxyc")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Room8/Moving Block/Block"]
+libraries = {
+"": SubResource("AnimationLibrary_s8522")
+}
+
+[node name="Moving Block2" type="Node2D" parent="Room8"]
+position = Vector2(384, 128)
+rotation = 3.14159
+
+[node name="Block" type="RigidBody2D" parent="Room8/Moving Block2"]
+position = Vector2(-192, 0)
+freeze = true
+freeze_mode = 1
+
+[node name="JustABox" type="Sprite2D" parent="Room8/Moving Block2/Block"]
+modulate = Color(0, 0, 0, 1)
+position = Vector2(-3.05176e-05, 0)
+scale = Vector2(8, 4)
+texture = ExtResource("1_c1t8q")
+
+[node name="Floor Collider" type="CollisionShape2D" parent="Room8/Moving Block2/Block"]
+shape = SubResource("RectangleShape2D_uwxyc")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Room8/Moving Block2/Block"]
+libraries = {
+"": SubResource("AnimationLibrary_s8522")
+}
+
+[node name="Room9" type="Node2D" parent="."]
+position = Vector2(3328, 1024)
+
+[node name="Wall" type="StaticBody2D" parent="Room9"]
+position = Vector2(128, 0)
+rotation = 0.785398
+
+[node name="JustABox" type="Sprite2D" parent="Room9/Wall"]
+modulate = Color(0, 0, 0, 1)
+position = Vector2(96.0001, 0)
+scale = Vector2(7.00001, 1)
+texture = ExtResource("1_c1t8q")
+
+[node name="Floor Collider" type="CollisionShape2D" parent="Room9/Wall"]
+position = Vector2(96, 0)
+shape = SubResource("RectangleShape2D_11wln")
+
+[node name="Wall2" type="StaticBody2D" parent="Room9"]
+position = Vector2(128, 0)
+rotation = -0.785398
+
+[node name="JustABox" type="Sprite2D" parent="Room9/Wall2"]
+modulate = Color(0, 0, 0, 1)
+position = Vector2(96.0001, 0)
+scale = Vector2(7.00001, 1)
+texture = ExtResource("1_c1t8q")
+
+[node name="Floor Collider" type="CollisionShape2D" parent="Room9/Wall2"]
+position = Vector2(96, 0)
+shape = SubResource("RectangleShape2D_11wln")
+
+[node name="Wall3" type="StaticBody2D" parent="Room9"]
+position = Vector2(640, 0)
+rotation = 2.35619
+
+[node name="JustABox" type="Sprite2D" parent="Room9/Wall3"]
+modulate = Color(0, 0, 0, 1)
+position = Vector2(96.0001, 0)
+scale = Vector2(7.00001, 1)
+texture = ExtResource("1_c1t8q")
+
+[node name="Floor Collider" type="CollisionShape2D" parent="Room9/Wall3"]
+position = Vector2(96, 0)
+shape = SubResource("RectangleShape2D_11wln")
+
+[node name="Wall4" type="StaticBody2D" parent="Room9"]
+position = Vector2(640, 0)
+rotation = -2.35619
+
+[node name="JustABox" type="Sprite2D" parent="Room9/Wall4"]
+modulate = Color(0, 0, 0, 1)
+position = Vector2(96.0001, 0)
+scale = Vector2(7.00001, 1)
+texture = ExtResource("1_c1t8q")
+
+[node name="Floor Collider" type="CollisionShape2D" parent="Room9/Wall4"]
+position = Vector2(96, 0)
+shape = SubResource("RectangleShape2D_11wln")
+
+[node name="Wall5" type="StaticBody2D" parent="Room9"]
+position = Vector2(384, -96)
+rotation = 0.785398
+
+[node name="JustABox" type="Sprite2D" parent="Room9/Wall5"]
+modulate = Color(0, 0, 0, 1)
+position = Vector2(32.0001, 0)
+scale = Vector2(3, 1)
+texture = ExtResource("1_c1t8q")
+
+[node name="Floor Collider" type="CollisionShape2D" parent="Room9/Wall5"]
+position = Vector2(32, 0)
+shape = SubResource("RectangleShape2D_tchou")
+
+[node name="Wall6" type="StaticBody2D" parent="Room9"]
+position = Vector2(384, -96)
+rotation = 2.35619
+
+[node name="JustABox" type="Sprite2D" parent="Room9/Wall6"]
+modulate = Color(0, 0, 0, 1)
+position = Vector2(32.0001, 0)
+scale = Vector2(3, 1)
+texture = ExtResource("1_c1t8q")
+
+[node name="Floor Collider" type="CollisionShape2D" parent="Room9/Wall6"]
+position = Vector2(32, 0)
+shape = SubResource("RectangleShape2D_tchou")
+
+[node name="Wall7" type="StaticBody2D" parent="Room9"]
+position = Vector2(384, 96)
+rotation = -2.35619
+
+[node name="JustABox" type="Sprite2D" parent="Room9/Wall7"]
+modulate = Color(0, 0, 0, 1)
+position = Vector2(32.0001, 0)
+scale = Vector2(3, 1)
+texture = ExtResource("1_c1t8q")
+
+[node name="Floor Collider" type="CollisionShape2D" parent="Room9/Wall7"]
+position = Vector2(32, 0)
+shape = SubResource("RectangleShape2D_tchou")
+
+[node name="Wall8" type="StaticBody2D" parent="Room9"]
+position = Vector2(384, 96)
+rotation = -0.785398
+
+[node name="JustABox" type="Sprite2D" parent="Room9/Wall8"]
+modulate = Color(0, 0, 0, 1)
+position = Vector2(32.0001, 0)
+scale = Vector2(3, 1)
+texture = ExtResource("1_c1t8q")
+
+[node name="Floor Collider" type="CollisionShape2D" parent="Room9/Wall8"]
+position = Vector2(32, 0)
+shape = SubResource("RectangleShape2D_tchou")
+
+[node name="Wall9" type="StaticBody2D" parent="Room9"]
+position = Vector2(384, 96)
+
+[node name="JustABox" type="Sprite2D" parent="Room9/Wall9"]
+modulate = Color(0, 0, 0, 1)
+position = Vector2(7.62939e-05, 80)
+scale = Vector2(1.00001, 5)
+texture = ExtResource("1_c1t8q")
+
+[node name="Floor Collider" type="CollisionShape2D" parent="Room9/Wall9"]
+position = Vector2(0, 80)
+shape = SubResource("RectangleShape2D_stllw")
+
+[node name="Wall10" type="StaticBody2D" parent="Room9"]
+position = Vector2(384, -256)
+
+[node name="JustABox" type="Sprite2D" parent="Room9/Wall10"]
+modulate = Color(0, 0, 0, 1)
+position = Vector2(7.62939e-05, 80)
+scale = Vector2(1.00001, 5)
+texture = ExtResource("1_c1t8q")
+
+[node name="Floor Collider" type="CollisionShape2D" parent="Room9/Wall10"]
+position = Vector2(0, 80)
+shape = SubResource("RectangleShape2D_stllw")
+
+[node name="Room10" type="Node2D" parent="."]
+position = Vector2(0, 2048)
+script = ExtResource("2_afldu")
+roomNumber = 2
+
+[node name="Wall" type="StaticBody2D" parent="Room10"]
+position = Vector2(384, 0)
+
+[node name="JustABox" type="Sprite2D" parent="Room10/Wall"]
+modulate = Color(0, 0, 0, 1)
+position = Vector2(0, 320)
+scale = Vector2(4, 16)
+texture = ExtResource("1_c1t8q")
+
+[node name="Floor Collider" type="CollisionShape2D" parent="Room10/Wall"]
+position = Vector2(0, 320)
+shape = SubResource("RectangleShape2D_bciwm")
+
+[node name="JustABox2" type="Sprite2D" parent="Room10/Wall"]
+modulate = Color(0, 0, 0, 1)
+position = Vector2(0, -320)
+scale = Vector2(4, 16)
+texture = ExtResource("1_c1t8q")
+
+[node name="Floor Collider2" type="CollisionShape2D" parent="Room10/Wall"]
+position = Vector2(0, -320)
+shape = SubResource("RectangleShape2D_bciwm")
+
+[node name="Wall2" type="StaticBody2D" parent="Room10"]
+position = Vector2(160, 0)
+
+[node name="JustABox" type="Sprite2D" parent="Room10/Wall2"]
+modulate = Color(0, 0, 0, 1)
+position = Vector2(0, 320)
+scale = Vector2(4, 16)
+texture = ExtResource("1_c1t8q")
+
+[node name="Floor Collider" type="CollisionShape2D" parent="Room10/Wall2"]
+position = Vector2(0, 320)
+shape = SubResource("RectangleShape2D_bciwm")
+
+[node name="JustABox2" type="Sprite2D" parent="Room10/Wall2"]
+modulate = Color(0, 0, 0, 1)
+position = Vector2(0, -320)
+scale = Vector2(4, 16)
+texture = ExtResource("1_c1t8q")
+
+[node name="Floor Collider2" type="CollisionShape2D" parent="Room10/Wall2"]
+position = Vector2(0, -320)
+shape = SubResource("RectangleShape2D_bciwm")
+
+[node name="Wall3" type="StaticBody2D" parent="Room10"]
+position = Vector2(608, 0)
+
+[node name="JustABox" type="Sprite2D" parent="Room10/Wall3"]
+modulate = Color(0, 0, 0, 1)
+position = Vector2(0, 320)
+scale = Vector2(4, 16)
+texture = ExtResource("1_c1t8q")
+
+[node name="Floor Collider" type="CollisionShape2D" parent="Room10/Wall3"]
+position = Vector2(0, 320)
+shape = SubResource("RectangleShape2D_bciwm")
+
+[node name="JustABox2" type="Sprite2D" parent="Room10/Wall3"]
+modulate = Color(0, 0, 0, 1)
+position = Vector2(0, -320)
+scale = Vector2(4, 16)
+texture = ExtResource("1_c1t8q")
+
+[node name="Floor Collider2" type="CollisionShape2D" parent="Room10/Wall3"]
+position = Vector2(0, -320)
+shape = SubResource("RectangleShape2D_bciwm")
+
+[connection signal="animation_finished" from="Room8/Moving Block/Block/AnimationPlayer" to="Room8" method="_on_animation_player_animation_finished"]
