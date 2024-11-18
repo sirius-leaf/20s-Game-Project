@@ -13,11 +13,9 @@ var _roomNames: Array[String] = [
 	"Room6",
 	"Room7",
 	"Room8",
-	"Room9",
 	"Room10",
 ]
 
-@onready var _player: RigidBody2D = $"../Player"
 @onready var _timer = $Timer
 
 func _ready():
@@ -36,7 +34,7 @@ func spawn_room():
 	for i in range(10):
 		# set random room scene
 		room = roomsScene.instantiate().get_node(_roomNames[
-				_rng.randi_range(0, 9)]).duplicate()
+				_rng.randi_range(0, 8)]).duplicate()
 		
 		# spawn the room
 		room.global_position = global_position

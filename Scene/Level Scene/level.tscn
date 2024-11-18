@@ -16,10 +16,9 @@ size = Vector2(768, 384)
 [node name="Level" type="Node2D"]
 
 [node name="Player" parent="." instance=ExtResource("1_7koso")]
-position = Vector2(128, 0)
 
 [node name="Player Camera" type="Camera2D" parent="Player"]
-zoom = Vector2(0.5, 0.5)
+zoom = Vector2(2, 2)
 position_smoothing_enabled = true
 
 [node name="UI Canvas" parent="." instance=ExtResource("3_bliyl")]
