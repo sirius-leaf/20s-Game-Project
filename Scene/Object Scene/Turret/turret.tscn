@@ -10,6 +10,10 @@ size = Vector2(32, 16)
 [node name="Turret" type="StaticBody2D"]
 script = ExtResource("1_35mlq")
 bulletScene = ExtResource("2_vvtkb")
+fireRate = 0.05
+shotDuration = 1.0
+shotDelay = 2.0
+shootAngleVariation = 3.0
 
 [node name="JustABox" type="Sprite2D" parent="."]
 position = Vector2(0, -4)
@@ -34,10 +38,9 @@ texture = ExtResource("1_5wpt4")
 position = Vector2(32, 1.39876e-06)
 
 [node name="Fire Rate" type="Timer" parent="."]
-wait_time = 0.05
+wait_time = 0.1
 autostart = true
 
 [node name="Shot Controller" type="Timer" parent="."]
 
 [connection signal="timeout" from="Fire Rate" to="." method="_on_fire_rate_timeout"]
-[connection signal="timeout" from="Shot Controller" to="." method="_on_shot_controller_timeout"]

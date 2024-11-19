@@ -1,0 +1,32 @@
+[gd_scene load_steps=5 format=3 uid="uid://d4lpb0pb7frhv"]
+
+[ext_resource type="Script" path="res://Script/missle_turret.gd" id="1_j6sgx"]
+[ext_resource type="PackedScene" uid="uid://h6g7va25k00n" path="res://Scene/Object Scene/Bullet/enemy_missle.tscn" id="2_hebd2"]
+[ext_resource type="Texture2D" uid="uid://d2b0sc40y3hsr" path="res://Asset/Sprite/Just a box.png" id="3_akk2m"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xg6rn"]
+size = Vector2(32, 16)
+
+[node name="Missle Turret" type="StaticBody2D"]
+script = ExtResource("1_j6sgx")
+missleScene = ExtResource("2_hebd2")
+
+[node name="JustABox" type="Sprite2D" parent="."]
+position = Vector2(0, -4)
+scale = Vector2(2, 0.25)
+texture = ExtResource("3_akk2m")
+
+[node name="Collider" type="CollisionShape2D" parent="."]
+position = Vector2(0, -4)
+scale = Vector2(2, 0.5)
+shape = SubResource("RectangleShape2D_xg6rn")
+
+[node name="Fire Rate" type="Timer" parent="."]
+wait_time = 2.0
+autostart = true
+
+[node name="Missle Spawner" type="Marker2D" parent="."]
+position = Vector2(0, -8)
+rotation = -1.5708
+
+[connection signal="timeout" from="Fire Rate" to="." method="_on_fire_rate_timeout"]
