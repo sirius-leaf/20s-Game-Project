@@ -16,6 +16,11 @@ position = Vector2(0, -4)
 scale = Vector2(2, 0.25)
 texture = ExtResource("3_akk2m")
 
+[node name="JustABox2" type="Sprite2D" parent="."]
+position = Vector2(0, -16)
+scale = Vector2(0.1875, 1)
+texture = ExtResource("3_akk2m")
+
 [node name="Collider" type="CollisionShape2D" parent="."]
 position = Vector2(0, -4)
 scale = Vector2(2, 0.5)
@@ -26,7 +31,7 @@ wait_time = 2.0
 autostart = true
 
 [node name="Missle Spawner" type="Marker2D" parent="."]
-position = Vector2(0, -8)
+position = Vector2(0, -32)
 rotation = -1.5708
 
 [connection signal="timeout" from="Fire Rate" to="." method="_on_fire_rate_timeout"]

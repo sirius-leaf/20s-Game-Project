@@ -15,7 +15,7 @@ enum TurretTypeEnum {
 var _rng := RandomNumberGenerator.new()
 
 var _fire: bool = false
-var _bullet: Area2D
+var _bullet
 var _shoot_state: int = 1
 
 @onready var player: RigidBody2D = $"../Player"
@@ -36,16 +36,17 @@ func _ready():
 func _process(delta):
 	var directionToPlayer: Vector2 = global_position.direction_to(
 			player.global_position)
-	var gunRotation: float = clampf(atan2(directionToPlayer.y,
-			directionToPlayer.x), -PI, 0.0)
+	var gunRotation: float = atan2(directionToPlayer.y, directionToPlayer.x)
 	
 	# rotate the gun to face player and limit the rotation value
 	match turretType:
 		TurretTypeEnum.BULLET:
-			gun.rotation = gunRotation
+			gun.global_rotation = gunRotation
 		TurretTypeEnum.LASER:
-			gun.rotation = lerp_angle(gun.rotation, gunRotation, 1.0 / (1.0 - 0.7) * delta)
+			gun.global_rotation = lerp_angle(gun.global_rotation, gunRotation,
+					1.0 / (1.0 - 0.7) * delta)
 	
+	gun.rotation_degrees = clampf(gun.rotation_degrees, -180.0, 0.0)
 
 
 func _on_fire_rate_timeout():

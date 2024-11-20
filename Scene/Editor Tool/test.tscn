@@ -1,10 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://c2qmejwl4ho88"]
+[gd_scene load_steps=5 format=3 uid="uid://c2qmejwl4ho88"]
 
 [ext_resource type="PackedScene" uid="uid://cdp1ti4scnxv" path="res://Scene/Object Scene/player.tscn" id="1_g6cyb"]
 [ext_resource type="PackedScene" uid="uid://blntv8vw2slvn" path="res://Scene/Object Scene/Rooms/empty_room.tscn" id="3_lpurp"]
 [ext_resource type="PackedScene" uid="uid://rfgu1kbc2oqs" path="res://Scene/Object Scene/ui_canvas.tscn" id="4_i67k6"]
-[ext_resource type="PackedScene" uid="uid://cekmmf3ymdtel" path="res://Scene/Object Scene/Turret/turret.tscn" id="4_oivxm"]
-[ext_resource type="PackedScene" uid="uid://uu1jyqhg4vph" path="res://Scene/Object Scene/Bullet/laser.tscn" id="5_xnrr4"]
+[ext_resource type="PackedScene" uid="uid://bkcq7tuo45xvp" path="res://Scene/Object Scene/Turret/laser_turret.tscn" id="4_imri1"]
 
 [node name="Test" type="Node2D"]
 
@@ -19,9 +18,5 @@ position = Vector2(-256, -192)
 
 [node name="UI Canvas" parent="." instance=ExtResource("4_i67k6")]
 
-[node name="Turret" parent="." instance=ExtResource("4_oivxm")]
-position = Vector2(128, 64)
-turretType = 1
-bulletScene = ExtResource("5_xnrr4")
-fireRate = 1.0
-shootAngleVariation = 5.0
+[node name="Laser Turret" parent="." instance=ExtResource("4_imri1")]
+rotation = -0.785398
