@@ -23,12 +23,6 @@ var _move := true
 
 func _ready():
 	_rng.randomize()
-	
-	match enemyType:
-		Type.SHOOTER:
-			fire_rate.start()
-		Type.EXPLODE:
-			fire_rate.one_shot = true
 
 
 func _process(delta):

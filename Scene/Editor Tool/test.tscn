@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://cdp1ti4scnxv" path="res://Scene/Object Scene/player.tscn" id="1_g6cyb"]
 [ext_resource type="PackedScene" uid="uid://blntv8vw2slvn" path="res://Scene/Object Scene/Rooms/empty_room.tscn" id="3_lpurp"]
-[ext_resource type="PackedScene" uid="uid://ba1nxtlsujg3r" path="res://Scene/Object Scene/Enemy/enemy.tscn" id="4_gpj25"]
+[ext_resource type="PackedScene" uid="uid://cmxrswgdxakxp" path="res://Scene/Object Scene/Enemy/enemy_explosive.tscn" id="4_f7dt6"]
 [ext_resource type="PackedScene" uid="uid://rfgu1kbc2oqs" path="res://Scene/Object Scene/ui_canvas.tscn" id="4_i67k6"]
 
 [node name="Test" type="Node2D"]
@@ -18,5 +18,5 @@ position = Vector2(-256, -192)
 
 [node name="UI Canvas" parent="." instance=ExtResource("4_i67k6")]
 
-[node name="Enemy" parent="." instance=ExtResource("4_gpj25")]
-position = Vector2(192, -64)
+[node name="EnemyExplosive" parent="." instance=ExtResource("4_f7dt6")]
+position = Vector2(192, -128)
