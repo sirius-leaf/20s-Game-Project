@@ -1,0 +1,10 @@
+[gd_scene load_steps=5 format=3 uid="uid://tsjtpivt0o5i"]
+
+[ext_resource type="Script" path="res://Script/turret_spawner.gd" id="1_xiylx"]
+[ext_resource type="PackedScene" uid="uid://cekmmf3ymdtel" path="res://Scene/Object Scene/Turret/turret.tscn" id="2_p0k7j"]
+[ext_resource type="PackedScene" uid="uid://d4lpb0pb7frhv" path="res://Scene/Object Scene/Turret/missle_turret.tscn" id="3_tllyt"]
+[ext_resource type="PackedScene" uid="uid://bkcq7tuo45xvp" path="res://Scene/Object Scene/Turret/laser_turret.tscn" id="4_xx7av"]
+
+[node name="TurretSpawner" type="Marker2D"]
+script = ExtResource("1_xiylx")
+turretScene = Array[PackedScene]([ExtResource("2_p0k7j"), ExtResource("3_tllyt"), ExtResource("4_xx7av")])

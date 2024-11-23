@@ -1,9 +1,11 @@
 [gd_scene load_steps=5 format=3 uid="uid://c2qmejwl4ho88"]
 
 [ext_resource type="PackedScene" uid="uid://cdp1ti4scnxv" path="res://Scene/Object Scene/player.tscn" id="1_g6cyb"]
-[ext_resource type="PackedScene" uid="uid://blntv8vw2slvn" path="res://Scene/Object Scene/Rooms/empty_room.tscn" id="3_lpurp"]
-[ext_resource type="PackedScene" uid="uid://cmxrswgdxakxp" path="res://Scene/Object Scene/Enemy/enemy_explosive.tscn" id="4_f7dt6"]
+[ext_resource type="Texture2D" uid="uid://d2b0sc40y3hsr" path="res://Asset/Sprite/Just a box.png" id="2_pdfve"]
 [ext_resource type="PackedScene" uid="uid://rfgu1kbc2oqs" path="res://Scene/Object Scene/ui_canvas.tscn" id="4_i67k6"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_74olo"]
+size = Vector2(768, 128)
 
 [node name="Test" type="Node2D"]
 
@@ -13,10 +15,36 @@
 zoom = Vector2(2, 2)
 position_smoothing_enabled = true
 
-[node name="Empty Room" parent="." instance=ExtResource("3_lpurp")]
+[node name="Empty Room" type="Node2D" parent="."]
 position = Vector2(-256, -192)
 
-[node name="UI Canvas" parent="." instance=ExtResource("4_i67k6")]
+[node name="Floor" type="StaticBody2D" parent="Empty Room"]
+position = Vector2(0, 256)
 
-[node name="EnemyExplosive" parent="." instance=ExtResource("4_f7dt6")]
-position = Vector2(192, -128)
+[node name="JustABox" type="Sprite2D" parent="Empty Room/Floor"]
+modulate = Color(0, 0, 0, 1)
+position = Vector2(384, 64)
+scale = Vector2(24, 4)
+texture = ExtResource("2_pdfve")
+
+[node name="Floor Collider" type="CollisionShape2D" parent="Empty Room/Floor"]
+position = Vector2(384, 64)
+shape = SubResource("RectangleShape2D_74olo")
+
+[node name="Floor2" type="StaticBody2D" parent="Empty Room"]
+position = Vector2(0, -256)
+
+[node name="JustABox" type="Sprite2D" parent="Empty Room/Floor2"]
+modulate = Color(0, 0, 0, 1)
+position = Vector2(384, -64)
+scale = Vector2(24, 4)
+texture = ExtResource("2_pdfve")
+
+[node name="Floor Collider" type="CollisionShape2D" parent="Empty Room/Floor2"]
+position = Vector2(384, -64)
+shape = SubResource("RectangleShape2D_74olo")
+
+[node name="Room End" type="Marker2D" parent="Empty Room"]
+position = Vector2(768, 0)
+
+[node name="UI Canvas" parent="." instance=ExtResource("4_i67k6")]

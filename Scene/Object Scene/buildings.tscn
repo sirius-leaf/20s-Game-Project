@@ -1,0 +1,16 @@
+[gd_scene load_steps=5 format=3 uid="uid://cq7rou06n85eu"]
+
+[ext_resource type="PackedScene" uid="uid://gujk5jqqma68" path="res://Scene/Object Scene/Building/building_1.tscn" id="1_ydoke"]
+[ext_resource type="PackedScene" uid="uid://wg1e37eivsgu" path="res://Scene/Object Scene/Building/building_2.tscn" id="2_har8c"]
+[ext_resource type="PackedScene" uid="uid://dpyn66lmt3h0l" path="res://Scene/Object Scene/Building/building_3.tscn" id="3_ol2cc"]
+[ext_resource type="PackedScene" uid="uid://culo5jm4j76bg" path="res://Scene/Object Scene/Building/wall.tscn" id="4_ix14o"]
+
+[node name="Buildings" type="Node2D"]
+
+[node name="Building1" parent="." instance=ExtResource("1_ydoke")]
+
+[node name="Building2" parent="." instance=ExtResource("2_har8c")]
+
+[node name="Building3" parent="." instance=ExtResource("3_ol2cc")]
+
+[node name="Wall" parent="." instance=ExtResource("4_ix14o")]
