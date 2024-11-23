@@ -1,0 +1,50 @@
+[gd_scene load_steps=7 format=3 uid="uid://ba1nxtlsujg3r"]
+
+[ext_resource type="Script" path="res://Script/enemy.gd" id="1_2i06s"]
+[ext_resource type="Texture2D" uid="uid://d2b0sc40y3hsr" path="res://Asset/Sprite/Just a box.png" id="1_wkl0x"]
+[ext_resource type="PackedScene" uid="uid://jhukkquch577" path="res://Scene/Object Scene/Bullet/enemy_bulet.tscn" id="2_33tl5"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_ic1pj"]
+friction = 0.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_vinrq"]
+radius = 32.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_cgxcc"]
+size = Vector2(32, 16)
+
+[node name="Enemy" type="Node2D"]
+script = ExtResource("1_2i06s")
+bulletScene = ExtResource("2_33tl5")
+moveSpeed = 1000.0
+minDistanceToPlayer = 200.0
+minDistanceToShoot = 300.0
+
+[node name="EnemyBody" type="RigidBody2D" parent="."]
+modulate = Color(1, 0.41, 0.41, 1)
+collision_layer = 2
+collision_mask = 2
+physics_material_override = SubResource("PhysicsMaterial_ic1pj")
+gravity_scale = 0.0
+linear_damp = 5.0
+
+[node name="JustABox" type="Sprite2D" parent="EnemyBody"]
+scale = Vector2(1, 0.5)
+texture = ExtResource("1_wkl0x")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EnemyBody"]
+shape = SubResource("CircleShape2D_vinrq")
+
+[node name="BulletSpawner" type="Marker2D" parent="EnemyBody"]
+
+[node name="FireRate" type="Timer" parent="EnemyBody"]
+wait_time = 0.25
+autostart = true
+
+[node name="Area2D" type="Area2D" parent="."]
+linear_damp = 0.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("RectangleShape2D_cgxcc")
+
+[connection signal="timeout" from="EnemyBody/FireRate" to="." method="_on_fire_rate_timeout"]

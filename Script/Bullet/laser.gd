@@ -11,9 +11,11 @@ func _process(delta):
 				raycast.get_collision_point()) if raycast.is_colliding() else 512.0
 		var collideWith: Object = raycast.get_collider()
 		
+		# reduce player health when hit
 		if collideWith != null and collideWith.has_method("ReduceHealth"):
 			collideWith.ReduceHealth(2)
 		
+		# set laser line to hit point
 		line.points[1] = Vector2(hitPoint, 0.0)
 		
 		hit = false
