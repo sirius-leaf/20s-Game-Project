@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://culo5jm4j76bg"]
+
+[ext_resource type="Texture2D" uid="uid://d2b0sc40y3hsr" path="res://Asset/Sprite/Just a box.png" id="1_gs3kr"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_tx0vr"]
+size = Vector2(16, 192)
+
+[node name="Wall" type="StaticBody2D"]
+
+[node name="JustABox" type="Sprite2D" parent="."]
+position = Vector2(1.40667e-05, -96)
+scale = Vector2(0.500002, 6)
+texture = ExtResource("1_gs3kr")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -96)
+shape = SubResource("RectangleShape2D_tx0vr")

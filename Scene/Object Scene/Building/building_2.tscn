@@ -1,0 +1,24 @@
+[gd_scene load_steps=4 format=3 uid="uid://wg1e37eivsgu"]
+
+[ext_resource type="Texture2D" uid="uid://d2b0sc40y3hsr" path="res://Asset/Sprite/Just a box.png" id="1_2relf"]
+[ext_resource type="PackedScene" uid="uid://tsjtpivt0o5i" path="res://Scene/Object Scene/turret_spawner.tscn" id="2_dl6l2"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_an5h5"]
+size = Vector2(128, 128)
+
+[node name="Building2" type="StaticBody2D"]
+
+[node name="JustABox" type="Sprite2D" parent="."]
+position = Vector2(64, -64)
+scale = Vector2(4, 4)
+texture = ExtResource("1_2relf")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(64, -64)
+shape = SubResource("RectangleShape2D_an5h5")
+
+[node name="TurretSpawner" parent="." instance=ExtResource("2_dl6l2")]
+position = Vector2(64, -128)
+
+[node name="BuildingLength" type="Node2D" parent="."]
+position = Vector2(128, 0)

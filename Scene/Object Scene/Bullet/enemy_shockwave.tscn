@@ -1,0 +1,25 @@
+[gd_scene load_steps=4 format=3 uid="uid://l86d6t1egl68"]
+
+[ext_resource type="Script" path="res://Script/Bullet/bullet.gd" id="1_5v67k"]
+[ext_resource type="Texture2D" uid="uid://bt50g0u7dai1u" path="res://Asset/Sprite/Circlee.png" id="1_ijmh4"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_x45li"]
+radius = 64.0
+
+[node name="EnemyShockwave" type="Area2D"]
+script = ExtResource("1_5v67k")
+move = false
+
+[node name="Circlee" type="Sprite2D" parent="."]
+scale = Vector2(4, 4)
+texture = ExtResource("1_ijmh4")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_x45li")
+
+[node name="LifeTime" type="Timer" parent="."]
+wait_time = 0.2
+one_shot = true
+autostart = true
+
+[connection signal="timeout" from="LifeTime" to="." method="_on_life_time_timeout"]
