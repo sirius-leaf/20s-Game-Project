@@ -7,9 +7,10 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xg6rn"]
 size = Vector2(32, 16)
 
-[node name="Missle Turret" type="StaticBody2D"]
+[node name="Missle Turret" type="StaticBody2D" groups=["Turret"]]
 script = ExtResource("1_j6sgx")
 missleScene = ExtResource("2_hebd2")
+shotDelay = [2.0, 3.0]
 
 [node name="JustABox" type="Sprite2D" parent="."]
 position = Vector2(0, -4)
@@ -26,12 +27,11 @@ position = Vector2(0, -4)
 scale = Vector2(2, 0.5)
 shape = SubResource("RectangleShape2D_xg6rn")
 
-[node name="Fire Rate" type="Timer" parent="."]
+[node name="FireRate" type="Timer" parent="."]
 wait_time = 2.0
-autostart = true
 
 [node name="Missle Spawner" type="Marker2D" parent="."]
 position = Vector2(0, -32)
 rotation = -1.5708
 
-[connection signal="timeout" from="Fire Rate" to="." method="_on_fire_rate_timeout"]
+[connection signal="timeout" from="FireRate" to="." method="_on_fire_rate_timeout"]

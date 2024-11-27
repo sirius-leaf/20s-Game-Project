@@ -10,10 +10,12 @@ enum Type {
 @export var moveSpeed: float
 @export var minDistanceToPlayer: float
 @export var minDistanceToShoot: float
+@export var health := 5
 
 var _rng := RandomNumberGenerator.new()
 var _fire := true
 var _move := true
+var _explode := true
 
 @onready var enemy_body: RigidBody2D = $EnemyBody
 @onready var player: RigidBody2D = $"../Player"
@@ -39,9 +41,11 @@ func _process(delta):
 	
 	_fire = true if distanceToPlayer <= minDistanceToShoot else false
 	
-	if enemyType == Type.EXPLODE and _fire:
+	# explosive enemy behavior
+	if enemyType == Type.EXPLODE and _fire and _explode:
 		_move = false
 		fire_rate.start()
+		_explode = false
 	
 	bullet_spawner.look_at(player.global_position)
 	
@@ -49,6 +53,9 @@ func _process(delta):
 	if distanceToPlayer > minDistanceToPlayer and _move:
 		enemy_body.apply_central_force(Vector2(directionToPlayer.x, directionToPlayer.y) 
 				* moveSpeed)
+	
+	if health <= 0:
+		queue_free()
 
 
 func _on_fire_rate_timeout():
@@ -61,9 +68,15 @@ func _on_fire_rate_timeout():
 			queue_free()
 
 
+func _on_area_2d_area_entered(area):
+	if area.is_in_group("PlayerBullet"):
+		health -= 1
+		area.queue_free()
+
+
 func shoot():
 	var bullet: Area2D = bulletScene.instantiate()
 	bullet.global_position = bullet_spawner.global_position
 	bullet.global_rotation_degrees = bullet_spawner.global_rotation_degrees \
 			+ _rng.randf_range(-3.0, 3.0)
-	$"..".add_child(bullet)
+	get_tree().root.get_child(0).add_child(bullet)
