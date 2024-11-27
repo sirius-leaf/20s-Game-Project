@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://cdp1ti4scnxv" path="res://Scene/Object Scene/player.tscn" id="1_g6cyb"]
 [ext_resource type="Texture2D" uid="uid://d2b0sc40y3hsr" path="res://Asset/Sprite/Just a box.png" id="2_pdfve"]
-[ext_resource type="PackedScene" uid="uid://dd3wvihb4gtvr" path="res://Scene/Object Scene/power_source.tscn" id="4_31krl"]
+[ext_resource type="PackedScene" uid="uid://ba1nxtlsujg3r" path="res://Scene/Object Scene/Enemy/enemy.tscn" id="4_h5lqm"]
 [ext_resource type="PackedScene" uid="uid://rfgu1kbc2oqs" path="res://Scene/Object Scene/ui_canvas.tscn" id="4_i67k6"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_74olo"]
@@ -13,7 +13,6 @@ size = Vector2(768, 128)
 [node name="Player" parent="." instance=ExtResource("1_g6cyb")]
 
 [node name="Player Camera" type="Camera2D" parent="Player"]
-zoom = Vector2(2, 2)
 position_smoothing_enabled = true
 
 [node name="Empty Room" type="Node2D" parent="."]
@@ -50,5 +49,5 @@ position = Vector2(768, 0)
 
 [node name="UI Canvas" parent="." instance=ExtResource("4_i67k6")]
 
-[node name="PowerSource" parent="." instance=ExtResource("4_31krl")]
-position = Vector2(128, 64)
+[node name="Enemy" parent="." instance=ExtResource("4_h5lqm")]
+position = Vector2(256, -64)

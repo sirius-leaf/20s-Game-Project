@@ -77,7 +77,9 @@ func _on_shot_controller_timeout():
 
 
 func ShootBullet():
-	if _fire:
+	var distanceToPlayer = global_position.distance_to(player.global_position)
+	
+	if _fire and distanceToPlayer < 300.0:
 		Shoot()
 
 

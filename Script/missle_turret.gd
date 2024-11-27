@@ -8,6 +8,7 @@ var health := 3
 var _missle: Area2D
 var _rng := RandomNumberGenerator.new()
 
+@onready var player: RigidBody2D = $"../Player"
 @onready var missle_spawner = $"Missle Spawner"
 @onready var fire_rate = $FireRate
 
@@ -21,9 +22,12 @@ func _process(delta):
 
 
 func _on_fire_rate_timeout():
-	shoot()
-	fire_rate.wait_time = _rng.randf_range(shotDelay[0], shotDelay[1])
-	fire_rate.start()
+	var distanceToPlayer = global_position.distance_to(player.global_position)
+	
+	if distanceToPlayer <= 300.0:
+		shoot()
+		fire_rate.wait_time = _rng.randf_range(shotDelay[0], shotDelay[1])
+		fire_rate.start()
 
 
 func shoot():

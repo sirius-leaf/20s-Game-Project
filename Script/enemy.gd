@@ -50,7 +50,7 @@ func _process(delta):
 	bullet_spawner.look_at(player.global_position)
 	
 	# move the enemy when is far from player
-	if distanceToPlayer > minDistanceToPlayer and _move:
+	if distanceToPlayer > minDistanceToPlayer and distanceToPlayer < 300.0 and _move:
 		enemy_body.apply_central_force(Vector2(directionToPlayer.x, directionToPlayer.y) 
 				* moveSpeed)
 	

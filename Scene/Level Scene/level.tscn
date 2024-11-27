@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://xm5ntgfadppk"]
+[gd_scene load_steps=16 format=3 uid="uid://xm5ntgfadppk"]
 
 [ext_resource type="PackedScene" uid="uid://cdp1ti4scnxv" path="res://Scene/Object Scene/player.tscn" id="1_7koso"]
 [ext_resource type="Script" path="res://Script/floor.gd" id="3_3x54j"]
@@ -13,6 +13,7 @@
 [ext_resource type="PackedScene" uid="uid://dpyn66lmt3h0l" path="res://Scene/Object Scene/Building/building_3.tscn" id="11_dqfs1"]
 [ext_resource type="PackedScene" uid="uid://culo5jm4j76bg" path="res://Scene/Object Scene/Building/wall.tscn" id="12_jh6jm"]
 [ext_resource type="PackedScene" uid="uid://dd3wvihb4gtvr" path="res://Scene/Object Scene/power_source.tscn" id="13_1aasi"]
+[ext_resource type="PackedScene" uid="uid://dtqhi113mbsae" path="res://Scene/Object Scene/target_building.tscn" id="14_xjwyx"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_guawl"]
 size = Vector2(768, 400)
@@ -50,6 +51,7 @@ flyingEnemy = Array[PackedScene]([ExtResource("6_rp4ib"), ExtResource("7_yeupi")
 turretSpawner = ExtResource("8_8qjtb")
 building = Array[PackedScene]([ExtResource("9_gg03e"), ExtResource("10_5nwqy"), ExtResource("11_dqfs1"), ExtResource("12_jh6jm")])
 powerSource = ExtResource("13_1aasi")
+targetBuilding = ExtResource("14_xjwyx")
 
 [node name="Timer" type="Timer" parent="LevelBuilder"]
 wait_time = 0.05
