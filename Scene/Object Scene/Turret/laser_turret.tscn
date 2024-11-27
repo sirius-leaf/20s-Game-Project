@@ -7,14 +7,14 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xg6rn"]
 size = Vector2(32, 16)
 
-[node name="Laser Turret" type="StaticBody2D"]
+[node name="Laser Turret" type="StaticBody2D" groups=["Turret"]]
 position = Vector2(192, 0)
 script = ExtResource("1_ejn60")
 turretType = 1
 bulletScene = ExtResource("2_rffsp")
 fireRate = 1.0
 shotDuration = 1.0
-shotDelay = 2.0
+shotDelay = [1.0, 2.0]
 shootAngleVariation = 5.0
 
 [node name="JustABox" type="Sprite2D" parent="."]

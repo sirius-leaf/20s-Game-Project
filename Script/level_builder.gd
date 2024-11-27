@@ -3,14 +3,19 @@ extends Marker2D
 @export var flyingEnemy: Array[PackedScene]
 @export var turretSpawner: PackedScene
 @export var building: Array[PackedScene]
+@export var powerSource: PackedScene
+@export var targetBuilding: PackedScene
 
 var _rng := RandomNumberGenerator.new()
 var _object
+var _powerSourceSpawnPos := 1000.0
+var _powerSourceAmount := 0
+var _build := true
 
 @onready var player: RigidBody2D = $"../Player"
 
 func _process(delta):
-	if global_position.x - player.global_position.x < 350.0:
+	if global_position.x - player.global_position.x < 350.0 and _build:
 		build()
 
 
@@ -18,7 +23,26 @@ func build():
 	var spawnType := _rng.randi_range(1, 6)
 	var moveOffset := 0.0
 	
-	if spawnType <= 1:
+	if global_position.x >= _powerSourceSpawnPos:
+		spawnType = 0
+		
+		if _powerSourceAmount >= 3:
+			spawnType = -1
+	
+	if spawnType == 0:
+		# spawn power source
+		_object = powerSource.instantiate()
+		
+		_object.global_position = global_position
+		_powerSourceSpawnPos += 1000.0
+		_powerSourceAmount += 1
+	elif spawnType == -1:
+		# spawn target building
+		_object = targetBuilding.instantiate()
+		
+		_object.global_position = global_position
+		_build = false
+	elif spawnType <= 1:
 		# spawn flying enemy
 		_object = flyingEnemy[_rng.randi_range(0, flyingEnemy.size() -
 				1)].instantiate()
@@ -40,6 +64,6 @@ func build():
 		
 		_object.global_position = global_position
 	
-	$"..".add_child(_object)
+	get_tree().root.get_child(0).add_child(_object)
 	
 	global_position.x += 70 + moveOffset + _rng.randf_range(0.0, 250.0)

@@ -9,8 +9,10 @@ enum TurretTypeEnum {
 @export var bulletScene: PackedScene
 @export var fireRate: float
 @export var shotDuration: float
-@export var shotDelay: float
+@export var shotDelay := [0.0, 0.0]
 @export var shootAngleVariation: float
+
+var health := 3
 
 var _rng := RandomNumberGenerator.new()
 
@@ -47,6 +49,9 @@ func _process(delta):
 					1.0 / (1.0 - 0.7) * delta)
 	
 	gun.rotation_degrees = clampf(gun.rotation_degrees, -180.0, 0.0)
+	
+	if health <= 0:
+		queue_free()
 
 
 func _on_fire_rate_timeout():
@@ -55,6 +60,7 @@ func _on_fire_rate_timeout():
 			ShootBullet()
 		TurretTypeEnum.LASER:
 			Shoot()
+			fire_rate.wait_time = _rng.randf_range(shotDelay[0], shotDelay[1])
 
 
 func _on_shot_controller_timeout():
@@ -64,14 +70,16 @@ func _on_shot_controller_timeout():
 			shot_controller.wait_time = shotDuration
 		-1:
 			_fire = false
-			shot_controller.wait_time = shotDelay
+			shot_controller.wait_time = _rng.randf_range(shotDelay[0], shotDelay[1])
 	
 	_shoot_state *= -1
 	shot_controller.start()
 
 
 func ShootBullet():
-	if _fire:
+	var distanceToPlayer = global_position.distance_to(player.global_position)
+	
+	if _fire and distanceToPlayer < 300.0:
 		Shoot()
 
 
