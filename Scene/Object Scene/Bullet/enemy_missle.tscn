@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://h6g7va25k00n"]
 
 [ext_resource type="Script" path="res://Script/Bullet/enemy_missle.gd" id="1_cb310"]
-[ext_resource type="Texture2D" uid="uid://d2b0sc40y3hsr" path="res://Asset/Sprite/Just a box.png" id="2_ghyon"]
+[ext_resource type="Texture2D" uid="uid://ml42q1s6bteb" path="res://Asset/Sprite/Turrets.png" id="2_6glme"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_e4x6y"]
 size = Vector2(14, 2)
@@ -12,8 +12,9 @@ rotateSpeed = 4.0
 moveSpeed = 450.0
 
 [node name="JustABox" type="Sprite2D" parent="."]
-scale = Vector2(0.5, 0.125)
-texture = ExtResource("2_ghyon")
+texture = ExtResource("2_6glme")
+region_enabled = true
+region_rect = Rect2(67, 43, 18, 10)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_e4x6y")

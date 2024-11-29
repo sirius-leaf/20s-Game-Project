@@ -1,8 +1,8 @@
 [gd_scene load_steps=5 format=3 uid="uid://cekmmf3ymdtel"]
 
-[ext_resource type="Texture2D" uid="uid://d2b0sc40y3hsr" path="res://Asset/Sprite/Just a box.png" id="1_5wpt4"]
 [ext_resource type="Script" path="res://Script/turret.gd" id="1_35mlq"]
 [ext_resource type="PackedScene" uid="uid://jhukkquch577" path="res://Scene/Object Scene/Bullet/enemy_bulet.tscn" id="2_vvtkb"]
+[ext_resource type="Texture2D" uid="uid://ml42q1s6bteb" path="res://Asset/Sprite/Turrets.png" id="3_2hjov"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xg6rn"]
 size = Vector2(32, 16)
@@ -15,27 +15,30 @@ shotDuration = 1.0
 shotDelay = [2.0, 3.0]
 shootAngleVariation = 3.0
 
-[node name="JustABox" type="Sprite2D" parent="."]
-position = Vector2(0, -4)
-scale = Vector2(2, 0.25)
-texture = ExtResource("1_5wpt4")
-
-[node name="Collider" type="CollisionShape2D" parent="."]
-position = Vector2(0, -4)
-scale = Vector2(2, 0.5)
-shape = SubResource("RectangleShape2D_xg6rn")
-
 [node name="Gun" type="Node2D" parent="."]
 position = Vector2(0, -8)
 rotation = -1.5708
 
 [node name="JustABox2" type="Sprite2D" parent="Gun"]
-position = Vector2(16, 0)
-scale = Vector2(1, 0.1875)
-texture = ExtResource("1_5wpt4")
+position = Vector2(12, 4.34399e-05)
+rotation = 1.5708
+texture = ExtResource("3_2hjov")
+region_enabled = true
+region_rect = Rect2(67, 0, 26, 42)
 
 [node name="Bullet Spawner" type="Marker2D" parent="Gun"]
 position = Vector2(32, 1.39876e-06)
+
+[node name="JustABox" type="Sprite2D" parent="."]
+position = Vector2(0, -5)
+texture = ExtResource("3_2hjov")
+region_enabled = true
+region_rect = Rect2(0, 0, 66, 12)
+
+[node name="Collider" type="CollisionShape2D" parent="."]
+position = Vector2(0, -4)
+scale = Vector2(2, 0.5)
+shape = SubResource("RectangleShape2D_xg6rn")
 
 [node name="Fire Rate" type="Timer" parent="."]
 wait_time = 0.2

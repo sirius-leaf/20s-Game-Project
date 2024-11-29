@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://Script/turret.gd" id="1_ejn60"]
 [ext_resource type="PackedScene" uid="uid://uu1jyqhg4vph" path="res://Scene/Object Scene/Bullet/laser.tscn" id="2_rffsp"]
-[ext_resource type="Texture2D" uid="uid://d2b0sc40y3hsr" path="res://Asset/Sprite/Just a box.png" id="3_cn4ge"]
+[ext_resource type="Texture2D" uid="uid://ml42q1s6bteb" path="res://Asset/Sprite/Turrets.png" id="3_hl8td"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xg6rn"]
 size = Vector2(32, 16)
@@ -17,24 +17,16 @@ shotDuration = 1.0
 shotDelay = [1.0, 2.0]
 shootAngleVariation = 5.0
 
-[node name="JustABox" type="Sprite2D" parent="."]
-position = Vector2(0, -4)
-scale = Vector2(2, 0.25)
-texture = ExtResource("3_cn4ge")
-
-[node name="Collider" type="CollisionShape2D" parent="."]
-position = Vector2(0, -4)
-scale = Vector2(2, 0.5)
-shape = SubResource("RectangleShape2D_xg6rn")
-
 [node name="Gun" type="Node2D" parent="."]
 position = Vector2(0, -8)
 rotation = -1.5708
 
-[node name="JustABox2" type="Sprite2D" parent="Gun"]
-position = Vector2(16, 0)
-scale = Vector2(1, 0.1875)
-texture = ExtResource("3_cn4ge")
+[node name="JustABox3" type="Sprite2D" parent="Gun"]
+position = Vector2(12, 3.90411e-05)
+rotation = 1.5708
+texture = ExtResource("3_hl8td")
+region_enabled = true
+region_rect = Rect2(94, 0, 26, 42)
 
 [node name="Bullet Spawner" type="Marker2D" parent="Gun"]
 position = Vector2(32, 1.39876e-06)
@@ -43,6 +35,17 @@ position = Vector2(32, 1.39876e-06)
 position = Vector2(0, 0.000129541)
 points = PackedVector2Array(0, 0, 0, 0)
 width = 2.0
+
+[node name="JustABox" type="Sprite2D" parent="."]
+position = Vector2(0, -5)
+texture = ExtResource("3_hl8td")
+region_enabled = true
+region_rect = Rect2(0, 0, 66, 12)
+
+[node name="Collider" type="CollisionShape2D" parent="."]
+position = Vector2(0, -4)
+scale = Vector2(2, 0.5)
+shape = SubResource("RectangleShape2D_xg6rn")
 
 [node name="Fire Rate" type="Timer" parent="."]
 wait_time = 0.1

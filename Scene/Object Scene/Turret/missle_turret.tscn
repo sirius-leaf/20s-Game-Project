@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://Script/missle_turret.gd" id="1_j6sgx"]
 [ext_resource type="PackedScene" uid="uid://h6g7va25k00n" path="res://Scene/Object Scene/Bullet/enemy_missle.tscn" id="2_hebd2"]
-[ext_resource type="Texture2D" uid="uid://d2b0sc40y3hsr" path="res://Asset/Sprite/Just a box.png" id="3_akk2m"]
+[ext_resource type="Texture2D" uid="uid://ml42q1s6bteb" path="res://Asset/Sprite/Turrets.png" id="3_3x3tg"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xg6rn"]
 size = Vector2(32, 16)
@@ -13,14 +13,10 @@ missleScene = ExtResource("2_hebd2")
 shotDelay = [2.0, 3.0]
 
 [node name="JustABox" type="Sprite2D" parent="."]
-position = Vector2(0, -4)
-scale = Vector2(2, 0.25)
-texture = ExtResource("3_akk2m")
-
-[node name="JustABox2" type="Sprite2D" parent="."]
-position = Vector2(0, -16)
-scale = Vector2(0.1875, 1)
-texture = ExtResource("3_akk2m")
+position = Vector2(0, -20)
+texture = ExtResource("3_3x3tg")
+region_enabled = true
+region_rect = Rect2(0, 13, 66, 42)
 
 [node name="Collider" type="CollisionShape2D" parent="."]
 position = Vector2(0, -4)

@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://gujk5jqqma68"]
 
-[ext_resource type="Texture2D" uid="uid://d2b0sc40y3hsr" path="res://Asset/Sprite/Just a box.png" id="1_r2n3j"]
+[ext_resource type="Texture2D" uid="uid://bcdl5ylhwo084" path="res://Asset/Sprite/Buildings.png" id="1_k4epf"]
 [ext_resource type="PackedScene" uid="uid://tsjtpivt0o5i" path="res://Scene/Object Scene/turret_spawner.tscn" id="2_gj8fn"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_10d14"]
@@ -10,10 +10,11 @@ size = Vector2(256, 128)
 collision_layer = 3
 collision_mask = 3
 
-[node name="JustABox" type="Sprite2D" parent="."]
-position = Vector2(128, -64)
-scale = Vector2(8, 4)
-texture = ExtResource("1_r2n3j")
+[node name="BuildingSprite" type="Sprite2D" parent="."]
+position = Vector2(128, -64.5)
+texture = ExtResource("1_k4epf")
+region_enabled = true
+region_rect = Rect2(0, 130, 258, 131)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(128, -64)
