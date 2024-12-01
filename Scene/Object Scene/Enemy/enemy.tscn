@@ -28,9 +28,10 @@ gravity_scale = 0.0
 linear_damp = 5.0
 
 [node name="Enemies" type="Sprite2D" parent="EnemyBody"]
+position = Vector2(0, -1.5)
 texture = ExtResource("3_1vcy7")
 region_enabled = true
-region_rect = Rect2(0, 0, 34, 18)
+region_rect = Rect2(35, 0, 34, 21)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="EnemyBody"]
 shape = SubResource("CircleShape2D_vinrq")

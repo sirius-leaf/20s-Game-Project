@@ -10,6 +10,7 @@ collision_layer = 3
 collision_mask = 3
 
 [node name="WallSprite" type="Sprite2D" parent="."]
+z_index = 1
 position = Vector2(0, -97)
 texture = ExtResource("1_ati88")
 region_enabled = true

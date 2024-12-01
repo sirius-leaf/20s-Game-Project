@@ -1,16 +1,21 @@
-[gd_scene load_steps=4 format=3 uid="uid://l86d6t1egl68"]
+[gd_scene load_steps=5 format=3 uid="uid://l86d6t1egl68"]
 
-[ext_resource type="Script" path="res://Script/Bullet/bullet.gd" id="1_5v67k"]
+[ext_resource type="Script" path="res://Script/Bullet/enemy_shockwave.gd" id="1_7qa30"]
 [ext_resource type="Texture2D" uid="uid://bt50g0u7dai1u" path="res://Asset/Sprite/Circlee.png" id="1_ijmh4"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_x45li"]
 radius = 64.0
 
+[sub_resource type="Curve" id="Curve_d5502"]
+_data = [Vector2(0, 1), 0.0, 0.01, 0, 0, Vector2(1, 0), -3.077, 0.0, 0, 0]
+point_count = 2
+
 [node name="EnemyShockwave" type="Area2D"]
-script = ExtResource("1_5v67k")
+script = ExtResource("1_7qa30")
 move = false
 
 [node name="Circlee" type="Sprite2D" parent="."]
+visible = false
 scale = Vector2(4, 4)
 texture = ExtResource("1_ijmh4")
 
@@ -22,4 +27,18 @@ wait_time = 0.2
 one_shot = true
 autostart = true
 
+[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+emitting = false
+amount = 10
+lifetime = 0.2
+one_shot = true
+explosiveness = 1.0
+texture = ExtResource("1_ijmh4")
+spread = 180.0
+gravity = Vector2(0, 0)
+initial_velocity_max = 30.0
+scale_amount_max = 4.5
+scale_amount_curve = SubResource("Curve_d5502")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="timeout" from="LifeTime" to="." method="_on_life_time_timeout"]

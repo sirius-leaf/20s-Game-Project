@@ -1,9 +1,10 @@
-[gd_scene load_steps=16 format=3 uid="uid://xm5ntgfadppk"]
+[gd_scene load_steps=19 format=3 uid="uid://xm5ntgfadppk"]
 
 [ext_resource type="PackedScene" uid="uid://cdp1ti4scnxv" path="res://Scene/Object Scene/player.tscn" id="1_7koso"]
 [ext_resource type="Script" path="res://Script/floor.gd" id="3_3x54j"]
 [ext_resource type="Texture2D" uid="uid://d2b0sc40y3hsr" path="res://Asset/Sprite/Just a box.png" id="3_a8qrf"]
 [ext_resource type="PackedScene" uid="uid://rfgu1kbc2oqs" path="res://Scene/Object Scene/ui_canvas.tscn" id="3_bliyl"]
+[ext_resource type="Texture2D" uid="uid://cqf85lp1nhw4t" path="res://Asset/Sprite/Ground.png" id="3_rtbgs"]
 [ext_resource type="Script" path="res://Script/level_builder.gd" id="5_kv3rc"]
 [ext_resource type="PackedScene" uid="uid://ba1nxtlsujg3r" path="res://Scene/Object Scene/Enemy/enemy.tscn" id="6_rp4ib"]
 [ext_resource type="PackedScene" uid="uid://cmxrswgdxakxp" path="res://Scene/Object Scene/Enemy/enemy_explosive.tscn" id="7_yeupi"]
@@ -14,35 +15,93 @@
 [ext_resource type="PackedScene" uid="uid://culo5jm4j76bg" path="res://Scene/Object Scene/Building/wall.tscn" id="12_jh6jm"]
 [ext_resource type="PackedScene" uid="uid://dd3wvihb4gtvr" path="res://Scene/Object Scene/power_source.tscn" id="13_1aasi"]
 [ext_resource type="PackedScene" uid="uid://dtqhi113mbsae" path="res://Scene/Object Scene/target_building.tscn" id="14_xjwyx"]
+[ext_resource type="Texture2D" uid="uid://1dwpw20vdn1t" path="res://Asset/Sprite/Backgrounds.png" id="16_b7cqp"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_guawl"]
-size = Vector2(768, 400)
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_leog0"]
+
+[sub_resource type="Environment" id="Environment_bmfdd"]
+background_mode = 3
+glow_enabled = true
+glow_intensity = 6.9
+glow_hdr_threshold = 0.6
+adjustment_enabled = true
+adjustment_contrast = 1.6
 
 [node name="Level" type="Node2D"]
 
 [node name="Player" parent="." instance=ExtResource("1_7koso")]
 
 [node name="Player Camera" type="Camera2D" parent="Player"]
+z_index = 10
 zoom = Vector2(2, 2)
 position_smoothing_enabled = true
 
 [node name="UI Canvas" parent="." instance=ExtResource("3_bliyl")]
 
-[node name="Floor" type="RigidBody2D" parent="."]
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
 position = Vector2(0, 128)
-freeze = true
-freeze_mode = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+shape = SubResource("WorldBoundaryShape2D_leog0")
+
+[node name="Floors" type="Node2D" parent="."]
+position = Vector2(0, 128)
 script = ExtResource("3_3x54j")
 
-[node name="JustABox" type="Sprite2D" parent="Floor"]
-modulate = Color(0, 0, 0, 1)
-position = Vector2(4.33681e-19, 200)
-scale = Vector2(24, 12.5)
+[node name="Floor" type="Sprite2D" parent="Floors"]
+z_index = 2
+position = Vector2(0, 64)
+texture = ExtResource("3_rtbgs")
+
+[node name="JustABox" type="Sprite2D" parent="Floors/Floor"]
+modulate = Color(0.129412, 0.121569, 0.113725, 1)
+position = Vector2(0, 128)
+scale = Vector2(8, 4)
 texture = ExtResource("3_a8qrf")
 
-[node name="Floor Collider" type="CollisionShape2D" parent="Floor"]
-position = Vector2(0, 200)
-shape = SubResource("RectangleShape2D_guawl")
+[node name="Floor2" type="Sprite2D" parent="Floors"]
+z_index = 2
+position = Vector2(256, 64)
+texture = ExtResource("3_rtbgs")
+
+[node name="JustABox" type="Sprite2D" parent="Floors/Floor2"]
+modulate = Color(0.129412, 0.121569, 0.113725, 1)
+position = Vector2(0, 128)
+scale = Vector2(8, 4)
+texture = ExtResource("3_a8qrf")
+
+[node name="Floor3" type="Sprite2D" parent="Floors"]
+z_index = 2
+position = Vector2(-256, 64)
+texture = ExtResource("3_rtbgs")
+
+[node name="JustABox" type="Sprite2D" parent="Floors/Floor3"]
+modulate = Color(0.129412, 0.121569, 0.113725, 1)
+position = Vector2(0, 128)
+scale = Vector2(8, 4)
+texture = ExtResource("3_a8qrf")
+
+[node name="Floor4" type="Sprite2D" parent="Floors"]
+z_index = 2
+position = Vector2(-512, 64)
+texture = ExtResource("3_rtbgs")
+
+[node name="JustABox" type="Sprite2D" parent="Floors/Floor4"]
+modulate = Color(0.129412, 0.121569, 0.113725, 1)
+position = Vector2(0, 128)
+scale = Vector2(8, 4)
+texture = ExtResource("3_a8qrf")
+
+[node name="Floor5" type="Sprite2D" parent="Floors"]
+z_index = 2
+position = Vector2(512, 64)
+texture = ExtResource("3_rtbgs")
+
+[node name="JustABox" type="Sprite2D" parent="Floors/Floor5"]
+modulate = Color(0.129412, 0.121569, 0.113725, 1)
+position = Vector2(0, 128)
+scale = Vector2(8, 4)
+texture = ExtResource("3_a8qrf")
 
 [node name="LevelBuilder" type="Marker2D" parent="."]
 position = Vector2(384, 128)
@@ -56,3 +115,52 @@ targetBuilding = ExtResource("14_xjwyx")
 [node name="Timer" type="Timer" parent="LevelBuilder"]
 wait_time = 0.05
 autostart = true
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
+modulate = Color(0.4, 0.382733, 0.372, 1)
+motion_scale = Vector2(0.2, 0.2)
+motion_offset = Vector2(0, 125)
+motion_mirroring = Vector2(1280, 0)
+
+[node name="Buildings" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer"]
+texture = ExtResource("16_b7cqp")
+region_enabled = true
+region_rect = Rect2(0, 0, 1280, 256)
+
+[node name="ParallaxLayer2" type="ParallaxLayer" parent="ParallaxBackground"]
+modulate = Color(0.4, 0.382733, 0.372, 1)
+motion_scale = Vector2(0.3, 0.3)
+motion_offset = Vector2(0, 140)
+motion_mirroring = Vector2(1280, 0)
+
+[node name="Buildings" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer2"]
+texture = ExtResource("16_b7cqp")
+region_enabled = true
+region_rect = Rect2(0, 256, 1280, 256)
+
+[node name="ParallaxLayer3" type="ParallaxLayer" parent="ParallaxBackground"]
+modulate = Color(0.4, 0.382733, 0.372, 1)
+motion_scale = Vector2(0.4, 0.4)
+motion_offset = Vector2(0, 140)
+motion_mirroring = Vector2(1280, 0)
+
+[node name="Buildings" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer3"]
+texture = ExtResource("16_b7cqp")
+region_enabled = true
+region_rect = Rect2(0, 512, 1280, 256)
+
+[node name="ParallaxLayer4" type="ParallaxLayer" parent="ParallaxBackground"]
+modulate = Color(0.4, 0.3846, 0.372, 1)
+motion_scale = Vector2(0.5, 0.5)
+motion_offset = Vector2(0, 110)
+motion_mirroring = Vector2(1280, 0)
+
+[node name="Buildings" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer4"]
+texture = ExtResource("16_b7cqp")
+region_enabled = true
+region_rect = Rect2(0, 768, 1280, 256)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_bmfdd")

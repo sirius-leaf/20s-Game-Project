@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://cdp1ti4scnxv" path="res://Scene/Object Scene/player.tscn" id="1_g6cyb"]
 [ext_resource type="Texture2D" uid="uid://d2b0sc40y3hsr" path="res://Asset/Sprite/Just a box.png" id="2_pdfve"]
-[ext_resource type="PackedScene" uid="uid://ba1nxtlsujg3r" path="res://Scene/Object Scene/Enemy/enemy.tscn" id="4_h5lqm"]
+[ext_resource type="PackedScene" uid="uid://cmxrswgdxakxp" path="res://Scene/Object Scene/Enemy/enemy_explosive.tscn" id="4_ern0x"]
 [ext_resource type="PackedScene" uid="uid://rfgu1kbc2oqs" path="res://Scene/Object Scene/ui_canvas.tscn" id="4_i67k6"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_74olo"]
@@ -49,5 +49,5 @@ position = Vector2(768, 0)
 
 [node name="UI Canvas" parent="." instance=ExtResource("4_i67k6")]
 
-[node name="Enemy" parent="." instance=ExtResource("4_h5lqm")]
-position = Vector2(256, -64)
+[node name="EnemyExplosive" parent="." instance=ExtResource("4_ern0x")]
+position = Vector2(320, -128)
