@@ -1,13 +1,19 @@
-[gd_scene load_steps=4 format=3 uid="uid://h6g7va25k00n"]
+[gd_scene load_steps=6 format=3 uid="uid://h6g7va25k00n"]
 
 [ext_resource type="Script" path="res://Script/Bullet/enemy_missle.gd" id="1_cb310"]
 [ext_resource type="Texture2D" uid="uid://ml42q1s6bteb" path="res://Asset/Sprite/Turrets.png" id="2_6glme"]
+[ext_resource type="PackedScene" uid="uid://qe1rgjs56wqf" path="res://Scene/Object Scene/Particle/missle_explosion.tscn" id="2_jfagt"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_e4x6y"]
 size = Vector2(14, 2)
 
+[sub_resource type="Curve" id="Curve_3j3nx"]
+_data = [Vector2(0, 1), 0.0, -1.0, 0, 1, Vector2(1, 0), -1.0, 0.0, 1, 0]
+point_count = 2
+
 [node name="Enemy Missle" type="Area2D"]
 script = ExtResource("1_cb310")
+explosionParticle = ExtResource("2_jfagt")
 rotateSpeed = 4.0
 moveSpeed = 450.0
 
@@ -25,6 +31,17 @@ one_shot = true
 autostart = true
 
 [node name="Direction Guide" type="Node2D" parent="."]
+
+[node name="Trail" type="Line2D" parent="."]
+modulate = Color(1.9, 0.85, 0.6, 1)
+top_level = true
+width = 4.0
+width_curve = SubResource("Curve_3j3nx")
+
+[node name="TrailOrigin" type="Marker2D" parent="."]
+position = Vector2(-8, 0)
+
+[node name="MissleExplosion" parent="." instance=ExtResource("2_jfagt")]
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="timeout" from="Life Time" to="." method="_on_life_time_timeout"]

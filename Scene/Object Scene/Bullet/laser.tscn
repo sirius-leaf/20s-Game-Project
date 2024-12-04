@@ -14,7 +14,8 @@ autostart = true
 target_position = Vector2(512, 0)
 
 [node name="Line2D" type="Line2D" parent="."]
-points = PackedVector2Array(0, 0, 512, 0)
+modulate = Color(2, 1, 1, 1)
+points = PackedVector2Array(0, 0, 0, 0)
 width = 2.0
 
 [connection signal="timeout" from="Life Time" to="." method="_on_life_time_timeout"]
