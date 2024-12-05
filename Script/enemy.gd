@@ -65,6 +65,7 @@ func _on_fire_rate_timeout():
 				shoot()
 		Type.EXPLODE:
 			shoot()
+			$"../Player Camera".shakeMultiplier = 1.0
 			queue_free()
 
 

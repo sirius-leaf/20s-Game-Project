@@ -1,6 +1,6 @@
 extends Node2D
 
-@onready var camera: Camera2D = $"../Player/Player Camera"
+@onready var camera: Camera2D = $"../Player Camera"
 
 func _process(delta):
 	var distanceToPlayer := camera.global_position.x - global_position.x
