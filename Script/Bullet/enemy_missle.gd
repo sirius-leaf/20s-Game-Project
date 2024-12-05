@@ -34,9 +34,19 @@ func _process(delta):
 func _on_body_entered(body):
 	if body.is_in_group("Player"):
 		body.healthValue -= 4
+		$"../Player Camera".shakeMultiplier = 0.7
 	
+	spawn_explosion_particle()
+	queue_free()
+
+
+func _on_life_time_timeout():
+	spawn_explosion_particle()
+	queue_free()
+
+
+func spawn_explosion_particle():
 	var particle: CPUParticles2D = explosionParticle.instantiate()
 	particle.global_position = global_position
 	get_tree().root.get_child(0).add_child(particle)
 	particle.restart()
-	queue_free()

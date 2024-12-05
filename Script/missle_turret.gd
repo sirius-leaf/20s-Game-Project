@@ -1,6 +1,7 @@
 extends StaticBody2D
 
 @export var missleScene: PackedScene
+@export var explosionScene: PackedScene
 @export var shotDelay := [0.0, 0.0]
 
 var health := 3
@@ -18,6 +19,13 @@ func _ready():
 
 func _process(delta):
 	if health <= 0:
+		var explosion: CPUParticles2D = explosionScene.instantiate()
+		explosion.global_position = global_position
+		get_tree().root.get_child(0).add_child(explosion)
+		explosion.restart()
+		
+		$"../Player Camera".shakeMultiplier = 0.5
+		
 		queue_free()
 
 

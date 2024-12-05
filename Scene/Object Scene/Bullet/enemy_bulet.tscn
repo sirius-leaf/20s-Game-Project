@@ -7,6 +7,7 @@
 size = Vector2(14, 2)
 
 [node name="Enemy Bulet" type="Area2D"]
+modulate = Color(1.25, 1.55, 1.35, 1)
 script = ExtResource("1_xupjj")
 moveSpeed = 500.0
 

@@ -14,6 +14,7 @@ func _process(delta):
 		# reduce player health when hit
 		if collideWith != null and collideWith.has_method("ReduceHealth"):
 			collideWith.ReduceHealth(2)
+			$"../Player Camera".shakeMultiplier = 0.7
 		
 		# set laser line to hit point
 		line.points[1] = Vector2(hitPoint, 0.0)

@@ -7,6 +7,7 @@ enum TurretTypeEnum {
 
 @export var turretType: TurretTypeEnum
 @export var bulletScene: PackedScene
+@export var explosionScene: PackedScene
 @export var fireRate: float
 @export var shotDuration: float
 @export var shotDelay := [0.0, 0.0]
@@ -51,6 +52,13 @@ func _process(delta):
 	gun.rotation_degrees = clampf(gun.rotation_degrees, -180.0, 0.0)
 	
 	if health <= 0:
+		var explosion: CPUParticles2D = explosionScene.instantiate()
+		explosion.global_position = global_position
+		get_tree().root.get_child(0).add_child(explosion)
+		explosion.restart()
+		
+		$"../Player Camera".shakeMultiplier = 0.5
+		
 		queue_free()
 
 

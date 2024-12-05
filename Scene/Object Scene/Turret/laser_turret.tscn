@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://bkcq7tuo45xvp"]
+[gd_scene load_steps=6 format=3 uid="uid://bkcq7tuo45xvp"]
 
 [ext_resource type="Script" path="res://Script/turret.gd" id="1_ejn60"]
 [ext_resource type="PackedScene" uid="uid://uu1jyqhg4vph" path="res://Scene/Object Scene/Bullet/laser.tscn" id="2_rffsp"]
 [ext_resource type="Texture2D" uid="uid://ml42q1s6bteb" path="res://Asset/Sprite/Turrets.png" id="3_hl8td"]
+[ext_resource type="PackedScene" uid="uid://csc1wvsmrl5aw" path="res://Scene/Object Scene/Particle/turret_explosion.tscn" id="3_pek61"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xg6rn"]
 size = Vector2(32, 16)
@@ -12,6 +13,7 @@ position = Vector2(192, 0)
 script = ExtResource("1_ejn60")
 turretType = 1
 bulletScene = ExtResource("2_rffsp")
+explosionScene = ExtResource("3_pek61")
 fireRate = 1.0
 shotDuration = 1.0
 shotDelay = [1.0, 2.0]
