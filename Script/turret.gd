@@ -12,6 +12,7 @@ enum TurretTypeEnum {
 @export var shotDuration: float
 @export var shotDelay := [0.0, 0.0]
 @export var shootAngleVariation: float
+@export var baseSfxPitch: float
 
 var health := 3
 
@@ -26,6 +27,7 @@ var _shoot_state: int = 1
 @onready var bullet_spawner: Marker2D = $"Gun/Bullet Spawner"
 @onready var shot_controller: Timer = $"Shot Controller"
 @onready var fire_rate = $"Fire Rate"
+@onready var laser: AudioStreamPlayer = $Laser
 
 func _ready():
 	_rng.randomize()
@@ -99,4 +101,7 @@ func Shoot():
 			deg_to_rad(_rng.randf_range(-shootAngleVariation,
 			shootAngleVariation))
 	
-	get_parent().add_child(_bullet)
+	get_tree().root.get_child(0).add_child(_bullet)
+	
+	laser.pitch_scale = _rng.randf_range(baseSfxPitch - 0.1, baseSfxPitch + 0.1)
+	laser.play()

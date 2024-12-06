@@ -1,9 +1,10 @@
-[gd_scene load_steps=6 format=3 uid="uid://cekmmf3ymdtel"]
+[gd_scene load_steps=7 format=3 uid="uid://cekmmf3ymdtel"]
 
 [ext_resource type="Script" path="res://Script/turret.gd" id="1_35mlq"]
 [ext_resource type="PackedScene" uid="uid://jhukkquch577" path="res://Scene/Object Scene/Bullet/enemy_bulet.tscn" id="2_vvtkb"]
 [ext_resource type="Texture2D" uid="uid://ml42q1s6bteb" path="res://Asset/Sprite/Turrets.png" id="3_2hjov"]
 [ext_resource type="PackedScene" uid="uid://csc1wvsmrl5aw" path="res://Scene/Object Scene/Particle/turret_explosion.tscn" id="4_4wj0x"]
+[ext_resource type="AudioStream" uid="uid://dqf4d3wumc3jt" path="res://Asset/Sound Effect/Laser.ogg" id="5_e8js5"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xg6rn"]
 size = Vector2(32, 16)
@@ -16,6 +17,7 @@ fireRate = 0.1
 shotDuration = 1.0
 shotDelay = [2.0, 3.0]
 shootAngleVariation = 3.0
+baseSfxPitch = 0.75
 
 [node name="Gun" type="Node2D" parent="."]
 position = Vector2(0, -8)
@@ -47,5 +49,10 @@ wait_time = 0.2
 autostart = true
 
 [node name="Shot Controller" type="Timer" parent="."]
+
+[node name="Laser" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_e8js5")
+volume_db = -4.0
+pitch_scale = 0.75
 
 [connection signal="timeout" from="Fire Rate" to="." method="_on_fire_rate_timeout"]
