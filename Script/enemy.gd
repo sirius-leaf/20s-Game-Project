@@ -22,9 +22,13 @@ var _explode := true
 @onready var area_2d: Area2D = $Area2D
 @onready var bullet_spawner: Marker2D = $EnemyBody/BulletSpawner
 @onready var fire_rate: Timer = $EnemyBody/FireRate
+@onready var sprite = $EnemyBody/Sprite
 
 func _ready():
 	_rng.randomize()
+	
+	if enemyType == Type.EXPLODE: sprite.material.set_shader_parameter("active", 0.0)
+		
 
 
 func _process(delta):
@@ -37,7 +41,6 @@ func _process(delta):
 			player.global_position)
 	var distanceToPlayer: float = enemy_body.global_position.distance_to(
 			player.global_position)
-	var velocityX: float = enemy_body.linear_velocity.x
 	
 	_fire = true if distanceToPlayer <= minDistanceToShoot else false
 	
@@ -47,12 +50,15 @@ func _process(delta):
 		fire_rate.start()
 		_explode = false
 	
+	if not _explode: sprite.material.set_shader_parameter("active", round(sin(
+			Time.get_ticks_msec() * 0.05)))
+	
 	bullet_spawner.look_at(player.global_position)
 	
 	# move the enemy when is far from player
 	if distanceToPlayer > minDistanceToPlayer and distanceToPlayer < 300.0 and _move:
-		enemy_body.apply_central_force(Vector2(directionToPlayer.x, directionToPlayer.y) 
-				* moveSpeed)
+		enemy_body.apply_central_force(Vector2(directionToPlayer.x,
+				directionToPlayer.y) * moveSpeed)
 	
 	if health <= 0:
 		queue_free()

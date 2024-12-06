@@ -36,5 +36,3 @@ material = SubResource("CanvasItemMaterial_mh37k")
 position = Vector2(0, -96)
 points = PackedVector2Array(0, 0, 0, -400)
 gradient = SubResource("Gradient_5m7gi")
-
-[node name="PowerExplosion" parent="." instance=ExtResource("2_mtrkb")]

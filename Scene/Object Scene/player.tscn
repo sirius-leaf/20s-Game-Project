@@ -11,6 +11,8 @@ friction = 0.0
 radius = 3.0
 
 [node name="Player" type="RigidBody2D" groups=["Player"]]
+process_mode = 3
+process_priority = -1
 physics_material_override = SubResource("PhysicsMaterial_jvl48")
 gravity_scale = 0.0
 linear_damp = 8.0
