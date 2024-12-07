@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://xm5ntgfadppk"]
+[gd_scene load_steps=24 format=3 uid="uid://xm5ntgfadppk"]
 
 [ext_resource type="PackedScene" uid="uid://cdp1ti4scnxv" path="res://Scene/Object Scene/player.tscn" id="1_7koso"]
 [ext_resource type="Script" path="res://Script/global_setting.gd" id="1_vknd6"]
@@ -20,6 +20,7 @@
 [ext_resource type="PackedScene" uid="uid://dd3wvihb4gtvr" path="res://Scene/Object Scene/power_source.tscn" id="13_1aasi"]
 [ext_resource type="PackedScene" uid="uid://dtqhi113mbsae" path="res://Scene/Object Scene/target_building.tscn" id="14_xjwyx"]
 [ext_resource type="Texture2D" uid="uid://mo28k8hmoux5" path="res://Asset/Sprite/Backgrounds.png" id="16_r53k5"]
+[ext_resource type="Texture2D" uid="uid://dw0l1q0h8fnqc" path="res://Asset/Sprite/Player.png" id="21_8n6bd"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_leog0"]
 
@@ -61,6 +62,8 @@ wait_time = 0.1
 autostart = true
 
 [node name="Player" parent="." instance=ExtResource("1_7koso")]
+position = Vector2(-300, -200)
+constant_force = Vector2(2500, 1300)
 
 [node name="UI Canvas" parent="." instance=ExtResource("3_bliyl")]
 
@@ -190,5 +193,8 @@ region_rect = Rect2(0, 768, 1280, 256)
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_bmfdd")
+
+[node name="Player2" type="Sprite2D" parent="."]
+texture = ExtResource("21_8n6bd")
 
 [connection signal="timeout" from="Player Camera/ConstantShakeTimer" to="Player Camera" method="_on_constant_shake_timer_timeout"]

@@ -17,17 +17,25 @@ var _alive := true
 @onready var player_sprite: Sprite2D = $Player
 @onready var player_sfx: AudioStreamPlayer = $"../BGM/PlayerSFX"
 @onready var player_collider: CollisionShape2D = $"Player Collider"
+@onready var global_setting: GlobalSetting = $"../GlobalSetting"
 
 func _process(delta):
 	var moveInput := Vector2(Input.get_axis("ui_left", "ui_right"),
 			Input.get_axis("ui_up", "ui_down"))
 	
+	if not global_setting.play:
+		if position.x >= -45:
+			constant_force.x = 0.0
+		
+		if position.y >= -20:
+			constant_force.y = 0.0
+	
 	bullet_spawner.rotation_degrees = (90.0 - 70.0 * _direction)
 	
-	_shoot = true if Input.is_key_pressed(KEY_SPACE) and _alive else false
+	_shoot = true if Input.is_key_pressed(KEY_SPACE) and _alive and global_setting.play else false
 	
 	# move the player
-	if moveInput and _alive:
+	if moveInput and _alive and global_setting.play:
 		apply_central_force(moveInput * playerMoveSpeed)
 		
 		_direction = 1 if moveInput.x >= 0 else -1

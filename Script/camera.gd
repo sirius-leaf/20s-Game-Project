@@ -9,9 +9,11 @@ var _shake2 := Vector2(0.0, 0.0)
 var _shake2Temp := Vector2(0.0, 0.0)
 
 @onready var player: RigidBody2D = $"../Player"
+@onready var global_setting: GlobalSetting = $"../GlobalSetting"
 
 func _process(delta: float) -> void:
-	global_position = player.position + _shake + _shake2
+	if global_setting.play:
+		global_position = player.position + _shake + _shake2
 	
 	shakeMultiplier = shakeMultiplier - delta * 2 if shakeMultiplier > 0.0 else 0.0
 
