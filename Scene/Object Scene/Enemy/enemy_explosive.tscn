@@ -1,9 +1,10 @@
-[gd_scene load_steps=10 format=3 uid="uid://cmxrswgdxakxp"]
+[gd_scene load_steps=11 format=3 uid="uid://cmxrswgdxakxp"]
 
 [ext_resource type="Shader" path="res://Shader/enemy_explosive.gdshader" id="1_kvk4r"]
 [ext_resource type="Script" path="res://Script/enemy.gd" id="1_nmcoe"]
 [ext_resource type="PackedScene" uid="uid://l86d6t1egl68" path="res://Scene/Object Scene/Bullet/enemy_shockwave.tscn" id="2_vlsej"]
 [ext_resource type="Texture2D" uid="uid://rei0x0kbu8q7" path="res://Asset/Sprite/Enemies.png" id="3_5a72o"]
+[ext_resource type="PackedScene" uid="uid://bujormrrqpg3o" path="res://Scene/Object Scene/Particle/flying_object_explosion.tscn" id="3_jucj1"]
 [ext_resource type="AudioStream" uid="uid://yqy5baxgrdht" path="res://Asset/Sound Effect/Enemy_Explosion_SFX.ogg" id="5_vvilc"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_ic1pj"]
@@ -23,6 +24,7 @@ size = Vector2(32, 16)
 script = ExtResource("1_nmcoe")
 enemyType = 1
 bulletScene = ExtResource("2_vlsej")
+explosionScene = ExtResource("3_jucj1")
 moveSpeed = 1500.0
 minDistanceToPlayer = 100.0
 minDistanceToShoot = 110.0

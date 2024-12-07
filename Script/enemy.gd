@@ -7,6 +7,7 @@ enum Type {
 
 @export var enemyType: Type
 @export var bulletScene: PackedScene 
+@export var explosionScene: PackedScene
 @export var moveSpeed: float
 @export var minDistanceToPlayer: float
 @export var minDistanceToShoot: float
@@ -100,3 +101,9 @@ func shoot():
 	bullet.global_rotation_degrees = bullet_spawner.global_rotation_degrees \
 			+ _rng.randf_range(-3.0, 3.0)
 	get_tree().root.get_child(0).add_child(bullet)
+
+
+func spawn_particle():
+	var explosion: CPUParticles2D = explosionScene.instantiate()
+	explosion.global_position = global_position
+	get_tree().root.get_child(0).add_child(explosion)

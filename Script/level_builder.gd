@@ -16,11 +16,13 @@ var _objectSpawnOffset: float
 @onready var player: RigidBody2D = $"../Player"
 @onready var global_setting: GlobalSetting = $"../GlobalSetting"
 
+func _ready() -> void:
+	_objectSpawnOffset = 150.0 if global_setting.ChaosMode else 250.0
+
+
 func _process(delta):
 	if global_position.x - player.global_position.x < 350.0 and _build:
 		build()
-	
-	_objectSpawnOffset = 150.0 if global_setting.ChaosMode else 300.0
 
 
 func build():

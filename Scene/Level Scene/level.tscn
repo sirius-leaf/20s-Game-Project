@@ -32,6 +32,7 @@ glow_hdr_scale = 3.0
 adjustment_enabled = true
 adjustment_brightness = 0.9
 adjustment_contrast = 1.6
+adjustment_saturation = 1.1
 
 [node name="Level" type="Node2D"]
 top_level = true

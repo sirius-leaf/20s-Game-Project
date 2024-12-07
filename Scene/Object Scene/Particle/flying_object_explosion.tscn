@@ -1,0 +1,33 @@
+[gd_scene load_steps=5 format=3 uid="uid://bujormrrqpg3o"]
+
+[ext_resource type="Texture2D" uid="uid://bt50g0u7dai1u" path="res://Asset/Sprite/Circlee.png" id="1_2vs38"]
+[ext_resource type="Script" path="res://Script/particle.gd" id="2_1r52w"]
+[ext_resource type="AudioStream" uid="uid://d4d5w6oa2bvy6" path="res://Asset/Sound Effect/Explosion.ogg" id="3_r82yl"]
+
+[sub_resource type="Curve" id="Curve_d5502"]
+_data = [Vector2(0, 1), 0.0, 0.01, 0, 0, Vector2(1, 0), -3.077, 0.0, 0, 0]
+point_count = 2
+
+[node name="FlyingObjectExplosion" type="CPUParticles2D"]
+modulate = Color(2.1, 1.2, 0.75, 1)
+z_index = 2
+emitting = false
+amount = 10
+lifetime = 0.5
+one_shot = true
+explosiveness = 1.0
+texture = ExtResource("1_2vs38")
+direction = Vector2(0, -1)
+spread = 135.0
+gravity = Vector2(0, 700)
+initial_velocity_min = 50.0
+initial_velocity_max = 200.0
+scale_amount_min = 0.5
+scale_amount_curve = SubResource("Curve_d5502")
+script = ExtResource("2_1r52w")
+
+[node name="Explosion" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_r82yl")
+volume_db = -4.0
+pitch_scale = 0.4
+autoplay = true

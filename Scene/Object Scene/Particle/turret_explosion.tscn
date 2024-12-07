@@ -1,6 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://csc1wvsmrl5aw"]
+[gd_scene load_steps=5 format=3 uid="uid://csc1wvsmrl5aw"]
 
 [ext_resource type="Texture2D" uid="uid://bt50g0u7dai1u" path="res://Asset/Sprite/Circlee.png" id="1_j4kfu"]
+[ext_resource type="Script" path="res://Script/particle.gd" id="2_l0tvq"]
 [ext_resource type="AudioStream" uid="uid://dugt71t238d7w" path="res://Asset/Sound Effect/SmallExplosion.ogg" id="2_tind7"]
 
 [sub_resource type="Curve" id="Curve_d5502"]
@@ -24,6 +25,7 @@ initial_velocity_min = 50.0
 initial_velocity_max = 150.0
 scale_amount_min = 0.5
 scale_amount_curve = SubResource("Curve_d5502")
+script = ExtResource("2_l0tvq")
 
 [node name="Explosion" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("2_tind7")

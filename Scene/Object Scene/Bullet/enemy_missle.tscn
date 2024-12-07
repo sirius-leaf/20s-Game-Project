@@ -41,7 +41,5 @@ width_curve = SubResource("Curve_3j3nx")
 [node name="TrailOrigin" type="Marker2D" parent="."]
 position = Vector2(-8, 0)
 
-[node name="MissleExplosion" parent="." instance=ExtResource("2_jfagt")]
-
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="timeout" from="Life Time" to="." method="_on_life_time_timeout"]

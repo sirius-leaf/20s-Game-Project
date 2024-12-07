@@ -63,7 +63,6 @@ func _process(delta):
 		var explosion: CPUParticles2D = explosionScene.instantiate()
 		explosion.global_position = global_position
 		get_tree().root.get_child(0).add_child(explosion)
-		explosion.restart()
 		
 		$"../Player Camera".shakeMultiplier = 0.5
 		
@@ -75,9 +74,12 @@ func _on_fire_rate_timeout():
 		TurretTypeEnum.BULLET:
 			ShootBullet()
 		TurretTypeEnum.LASER:
-			Shoot()
-			fire_rate.wait_time = _rng.randf_range(shotDelay[0] - _shotDelayMod,
-					shotDelay[1] - _shotDelayMod)
+			var distanceToPlayer = global_position.distance_to(player.global_position)
+			
+			if distanceToPlayer < 300.0:
+				Shoot()
+				fire_rate.wait_time = _rng.randf_range(shotDelay[0] - _shotDelayMod,
+						shotDelay[1] - _shotDelayMod)
 
 
 func _on_shot_controller_timeout():

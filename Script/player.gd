@@ -2,6 +2,7 @@ extends RigidBody2D
 
 @export var playerMoveSpeed: float
 @export var bulletScene: PackedScene
+@export var explosionScene: PackedScene
 
 var healthValue := 15
 var insideTarget := false
@@ -21,9 +22,9 @@ func _process(delta):
 	var moveInput := Vector2(Input.get_axis("ui_left", "ui_right"),
 			Input.get_axis("ui_up", "ui_down"))
 	
-	_shoot = true if Input.is_key_pressed(KEY_SPACE) and _alive else false
-	
 	bullet_spawner.rotation_degrees = (90.0 - 70.0 * _direction)
+	
+	_shoot = true if Input.is_key_pressed(KEY_SPACE) and _alive else false
 	
 	# move the player
 	if moveInput and _alive:
@@ -39,7 +40,7 @@ func _process(delta):
 		get_tree().reload_current_scene()
 	
 	# rotate player to match move direction
-	rotation_degrees = linear_velocity.x / 400 * 30
+	rotation_degrees = linear_velocity.x / 400.0 * 30.0
 	
 	if healthValue <= 0 and _alive:
 		game_over()
@@ -72,6 +73,10 @@ func shoot():
 func game_over():
 	player_sprite.visible = false
 	player_collider.disabled = true
+	
+	var explosion: CPUParticles2D = explosionScene.instantiate()
+	explosion.global_position = global_position
+	get_tree().root.get_child(0).add_child(explosion)
 	
 	await get_tree().create_timer(1.0).timeout
 	
