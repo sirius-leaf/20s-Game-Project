@@ -12,6 +12,7 @@ var _rng := RandomNumberGenerator.new()
 @onready var player: RigidBody2D = $"../Player"
 @onready var missle_spawner = $"Missle Spawner"
 @onready var fire_rate = $FireRate
+@onready var sfx: AudioStreamPlayer2D = $MissleShot
 
 func _ready():
 	fire_rate.start()
@@ -45,3 +46,5 @@ func shoot():
 	_missle.global_rotation = missle_spawner.global_rotation
 	
 	$"../".add_child(_missle)
+	
+	sfx.play()

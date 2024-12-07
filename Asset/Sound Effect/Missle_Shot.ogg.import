@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://bepkj14png3cf"
+path="res://.godot/imported/Missle_Shot.ogg-30c01df9327d16e1749bd6c42c0dd0c0.oggvorbisstr"
+
+[deps]
+
+source_file="res://Asset/Sound Effect/Missle_Shot.ogg"
+dest_files=["res://.godot/imported/Missle_Shot.ogg-30c01df9327d16e1749bd6c42c0dd0c0.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

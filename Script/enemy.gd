@@ -50,8 +50,12 @@ func _process(delta):
 		fire_rate.start()
 		_explode = false
 	
-	if not _explode: sprite.material.set_shader_parameter("active", round(sin(
-			Time.get_ticks_msec() * 0.05)))
+	if not _explode:
+		var expoldeAnim: float = round(sin(Time.get_ticks_msec() * 0.05))
+		
+		sprite.material.set_shader_parameter("active", expoldeAnim)
+		
+		if expoldeAnim >= 1: $Area2D/AudioStreamPlayer2D.play()
 	
 	bullet_spawner.look_at(player.global_position)
 	
@@ -68,7 +72,12 @@ func _on_fire_rate_timeout():
 	match enemyType:
 		Type.SHOOTER:
 			if _fire:
+				var sfx: AudioStreamPlayer2D = $Area2D/AudioStreamPlayer2D
+				
 				shoot()
+				
+				sfx.pitch_scale = _rng.randf_range(0.9, 1.1)
+				sfx.play()
 		Type.EXPLODE:
 			shoot()
 			$"../Player Camera".shakeMultiplier = 1.0

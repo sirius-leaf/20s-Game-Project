@@ -27,7 +27,7 @@ var _shoot_state: int = 1
 @onready var bullet_spawner: Marker2D = $"Gun/Bullet Spawner"
 @onready var shot_controller: Timer = $"Shot Controller"
 @onready var fire_rate = $"Fire Rate"
-@onready var laser: AudioStreamPlayer = $Laser
+@onready var laser: AudioStreamPlayer2D = $LaserSFX
 
 func _ready():
 	_rng.randomize()
