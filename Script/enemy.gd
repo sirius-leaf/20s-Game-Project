@@ -23,12 +23,16 @@ var _explode := true
 @onready var bullet_spawner: Marker2D = $EnemyBody/BulletSpawner
 @onready var fire_rate: Timer = $EnemyBody/FireRate
 @onready var sprite = $EnemyBody/Sprite
+@onready var global_setting: GlobalSetting = $"../GlobalSetting"
 
 func _ready():
 	_rng.randomize()
 	
-	if enemyType == Type.EXPLODE: sprite.material.set_shader_parameter("active", 0.0)
-		
+	if enemyType == Type.EXPLODE:
+		fire_rate.wait_time = 0.5 if global_setting.ChaosMode else 1.0
+		sprite.material.set_shader_parameter("active", 0.0)
+	else:
+		fire_rate.wait_time = 0.2 if global_setting.ChaosMode else 0.3
 
 
 func _process(delta):

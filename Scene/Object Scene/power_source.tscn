@@ -1,8 +1,9 @@
-[gd_scene load_steps=7 format=3 uid="uid://dd3wvihb4gtvr"]
+[gd_scene load_steps=8 format=3 uid="uid://dd3wvihb4gtvr"]
 
 [ext_resource type="Script" path="res://Script/power_source.gd" id="1_p0r6m"]
 [ext_resource type="Texture2D" uid="uid://bcdl5ylhwo084" path="res://Asset/Sprite/Buildings.png" id="2_d1iye"]
 [ext_resource type="PackedScene" uid="uid://cxxrwpfsn6ajf" path="res://Scene/Object Scene/Particle/power_explosion.tscn" id="2_mtrkb"]
+[ext_resource type="Texture2D" uid="uid://d2b0sc40y3hsr" path="res://Asset/Sprite/Just a box.png" id="4_7oma7"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_s12jm"]
 size = Vector2(32, 96)
@@ -36,3 +37,9 @@ material = SubResource("CanvasItemMaterial_mh37k")
 position = Vector2(0, -96)
 points = PackedVector2Array(0, 0, 0, -400)
 gradient = SubResource("Gradient_5m7gi")
+
+[node name="JustABox" type="Sprite2D" parent="."]
+modulate = Color(2.55, 1.5, 1, 1)
+position = Vector2(0, -80)
+scale = Vector2(0.644273, 0.587587)
+texture = ExtResource("4_7oma7")

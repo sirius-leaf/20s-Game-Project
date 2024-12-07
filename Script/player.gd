@@ -14,7 +14,8 @@ var _alive := true
 
 @onready var bullet_spawner: Marker2D = $BulletSpawner
 @onready var player_sprite: Sprite2D = $Player
-@onready var player_sfx: AudioStreamPlayer2D = $"../BGM/PlayerSFX"
+@onready var player_sfx: AudioStreamPlayer = $"../BGM/PlayerSFX"
+@onready var player_collider: CollisionShape2D = $"Player Collider"
 
 func _process(delta):
 	var moveInput := Vector2(Input.get_axis("ui_left", "ui_right"),
@@ -70,6 +71,7 @@ func shoot():
 
 func game_over():
 	player_sprite.visible = false
+	player_collider.disabled = true
 	
 	await get_tree().create_timer(1.0).timeout
 	

@@ -21,6 +21,7 @@ var _rng := RandomNumberGenerator.new()
 var _fire: bool = false
 var _bullet
 var _shoot_state: int = 1
+var _shotDelayMod: float
 
 @onready var player: RigidBody2D = $"../Player"
 @onready var gun: Node2D = $Gun
@@ -28,14 +29,19 @@ var _shoot_state: int = 1
 @onready var shot_controller: Timer = $"Shot Controller"
 @onready var fire_rate = $"Fire Rate"
 @onready var laser: AudioStreamPlayer2D = $LaserSFX
+@onready var global_setting: GlobalSetting = $"../GlobalSetting"
 
 func _ready():
+	
 	_rng.randomize()
 	shot_controller.start()
 	fire_rate.wait_time = fireRate
 	
 	if turretType == TurretTypeEnum.BULLET:
+		_shotDelayMod = 1.0 if global_setting.ChaosMode else 0.0
 		shot_controller.connect("timeout", _on_shot_controller_timeout)
+	else:
+		_shotDelayMod = 0.5 if global_setting.ChaosMode else 0.0
 
 
 func _process(delta):
@@ -70,7 +76,8 @@ func _on_fire_rate_timeout():
 			ShootBullet()
 		TurretTypeEnum.LASER:
 			Shoot()
-			fire_rate.wait_time = _rng.randf_range(shotDelay[0], shotDelay[1])
+			fire_rate.wait_time = _rng.randf_range(shotDelay[0] - _shotDelayMod,
+					shotDelay[1] - _shotDelayMod)
 
 
 func _on_shot_controller_timeout():
@@ -80,7 +87,8 @@ func _on_shot_controller_timeout():
 			shot_controller.wait_time = shotDuration
 		-1:
 			_fire = false
-			shot_controller.wait_time = _rng.randf_range(shotDelay[0], shotDelay[1])
+			shot_controller.wait_time = _rng.randf_range(shotDelay[0] - \
+					_shotDelayMod, shotDelay[1] - _shotDelayMod)
 	
 	_shoot_state *= -1
 	shot_controller.start()

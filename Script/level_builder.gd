@@ -11,16 +11,20 @@ var _object
 var _powerSourceSpawnPos := 1000.0
 var _powerSourceAmount := 0
 var _build := true
+var _objectSpawnOffset: float
 
 @onready var player: RigidBody2D = $"../Player"
+@onready var global_setting: GlobalSetting = $"../GlobalSetting"
 
 func _process(delta):
 	if global_position.x - player.global_position.x < 350.0 and _build:
 		build()
+	
+	_objectSpawnOffset = 150.0 if global_setting.ChaosMode else 300.0
 
 
 func build():
-	var spawnType := _rng.randi_range(1, 6)
+	var spawnType := _rng.randi_range(1, 8)
 	var moveOffset := 0.0
 	
 	if global_position.x >= _powerSourceSpawnPos:
@@ -42,14 +46,14 @@ func build():
 		
 		_object.global_position = global_position
 		_build = false
-	elif spawnType <= 1:
+	elif spawnType <= 2:
 		# spawn flying enemy
 		_object = flyingEnemy[_rng.randi_range(0, flyingEnemy.size() -
 				1)].instantiate()
 		
 		_object.global_position = Vector2(global_position.x,
 				global_position.y - _rng.randf_range(50.0, 400.0))
-	elif spawnType <= 3:
+	elif spawnType <= 5:
 		# spawn buildings
 		_object = building[_rng.randi_range(0, building.size() - 1)].instantiate()
 		
@@ -66,4 +70,4 @@ func build():
 	
 	get_tree().root.get_child(0).add_child(_object)
 	
-	global_position.x += 70 + moveOffset + _rng.randf_range(0.0, 250.0)
+	global_position.x += 70 + moveOffset + _rng.randf_range(0.0, _objectSpawnOffset)

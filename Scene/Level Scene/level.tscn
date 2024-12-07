@@ -1,7 +1,7 @@
 [gd_scene load_steps=23 format=3 uid="uid://xm5ntgfadppk"]
 
 [ext_resource type="PackedScene" uid="uid://cdp1ti4scnxv" path="res://Scene/Object Scene/player.tscn" id="1_7koso"]
-[ext_resource type="Script" path="res://Script/bgm.gd" id="2_bjuh4"]
+[ext_resource type="Script" path="res://Script/global_setting.gd" id="1_vknd6"]
 [ext_resource type="AudioStream" uid="uid://c8emwgw2gpncx" path="res://Asset/Music/20s game ost.mp3" id="2_c7ai7"]
 [ext_resource type="Script" path="res://Script/floor.gd" id="3_3x54j"]
 [ext_resource type="Texture2D" uid="uid://d2b0sc40y3hsr" path="res://Asset/Sprite/Just a box.png" id="3_a8qrf"]
@@ -36,16 +36,18 @@ adjustment_contrast = 1.6
 [node name="Level" type="Node2D"]
 top_level = true
 
-[node name="BGM" type="AudioStreamPlayer2D" parent="."]
+[node name="GlobalSetting" type="Node" parent="."]
+script = ExtResource("1_vknd6")
+ChaosMode = true
+
+[node name="BGM" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("2_c7ai7")
 volume_db = -4.0
 autoplay = true
-script = ExtResource("2_bjuh4")
 
-[node name="PlayerSFX" type="AudioStreamPlayer2D" parent="BGM"]
+[node name="PlayerSFX" type="AudioStreamPlayer" parent="BGM"]
 stream = ExtResource("3_f37xc")
-volume_db = -4.0
-pitch_scale = 0.48
+volume_db = -2.0
 
 [node name="Player Camera" type="Camera2D" parent="."]
 zoom = Vector2(1.3, 1.3)
