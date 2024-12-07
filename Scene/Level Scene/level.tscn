@@ -40,7 +40,6 @@ top_level = true
 
 [node name="GlobalSetting" type="Node" parent="."]
 script = ExtResource("1_vknd6")
-ChaosMode = true
 
 [node name="BGM" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("2_c7ai7")
@@ -195,6 +194,8 @@ region_rect = Rect2(0, 768, 1280, 256)
 environment = SubResource("Environment_bmfdd")
 
 [node name="Player2" type="Sprite2D" parent="."]
+process_mode = 4
+visible = false
 texture = ExtResource("21_8n6bd")
 
 [connection signal="timeout" from="Player Camera/ConstantShakeTimer" to="Player Camera" method="_on_constant_shake_timer_timeout"]

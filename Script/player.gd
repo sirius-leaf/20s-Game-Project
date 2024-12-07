@@ -1,17 +1,22 @@
+class_name Player
+
 extends RigidBody2D
 
 @export var playerMoveSpeed: float
 @export var bulletScene: PackedScene
 @export var explosionScene: PackedScene
+@export var bombScene: PackedScene
 
 var healthValue := 15
 var insideTarget := false
 var powerSourceDestroyed := 0
+var move := true
 
 var _rng := RandomNumberGenerator.new()
 var _shoot := false
 var _direction := 1
 var _alive := true
+var _bombDrop := true
 
 @onready var bullet_spawner: Marker2D = $BulletSpawner
 @onready var player_sprite: Sprite2D = $Player
@@ -32,10 +37,18 @@ func _process(delta):
 	
 	bullet_spawner.rotation_degrees = (90.0 - 70.0 * _direction)
 	
-	_shoot = true if Input.is_key_pressed(KEY_SPACE) and _alive and global_setting.play else false
+	if insideTarget:
+		if _bombDrop and powerSourceDestroyed >= 3 and Input.is_action_pressed("ui_select"):
+			drop_bomb()
+			move = false
+			constant_force = Vector2(2500.0, -1500.0)
+			_bombDrop = false
+	
+	_shoot = true if (Input.is_key_pressed(KEY_SPACE) and _alive and
+			global_setting.play and move) else false
 	
 	# move the player
-	if moveInput and _alive and global_setting.play:
+	if moveInput and _alive and global_setting.play and move:
 		apply_central_force(moveInput * playerMoveSpeed)
 		
 		_direction = 1 if moveInput.x >= 0 else -1
@@ -89,3 +102,9 @@ func game_over():
 	await get_tree().create_timer(1.0).timeout
 	
 	get_tree().reload_current_scene()
+
+
+func drop_bomb():
+	var bomb: RigidBody2D = bombScene.instantiate()
+	bomb.global_position = global_position
+	get_tree().root.get_child(0).add_child(bomb)
