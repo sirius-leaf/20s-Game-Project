@@ -6,10 +6,10 @@ uniform vec4 newColor: source_color;
 
 void fragment() {
 	vec4 originalColor = texture(TEXTURE, UV);
-	
+
 	originalColor *= colorMultiplier;
-	
+
 	vec3 color = mix(originalColor.rgb, newColor.rgb, mixValue);
-	
+
 	COLOR = vec4(color, originalColor.a);
 }

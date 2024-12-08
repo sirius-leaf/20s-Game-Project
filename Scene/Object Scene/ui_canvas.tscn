@@ -1,10 +1,14 @@
-[gd_scene load_steps=8 format=3 uid="uid://rfgu1kbc2oqs"]
+[gd_scene load_steps=22 format=3 uid="uid://rfgu1kbc2oqs"]
 
 [ext_resource type="Script" path="res://Script/ui.gd" id="1_jdr6r"]
 [ext_resource type="Theme" uid="uid://bpmonp6ff4uvc" path="res://Asset/UI Theme/Proggress Bar.tres" id="2_7ugwh"]
 [ext_resource type="Shader" path="res://Shader/fill_color.gdshader" id="3_3ph76"]
 [ext_resource type="Texture2D" uid="uid://dw0l1q0h8fnqc" path="res://Asset/Sprite/Player.png" id="4_qkryj"]
 [ext_resource type="Texture2D" uid="uid://bqo34yooovifc" path="res://Asset/Sprite/Tak berjudul1094_20241208125444.png" id="5_u85yt"]
+[ext_resource type="Texture2D" uid="uid://bcdl5ylhwo084" path="res://Asset/Sprite/Buildings.png" id="6_5vwjl"]
+[ext_resource type="FontFile" uid="uid://cysc3mmqymops" path="res://Asset/Retro Gaming.ttf" id="7_yl6nr"]
+[ext_resource type="Texture2D" uid="uid://lyhocs7m42e8" path="res://Asset/Sprite/Pause_Button.png" id="8_mmmr1"]
+[ext_resource type="Texture2D" uid="uid://d2b0sc40y3hsr" path="res://Asset/Sprite/Just a box.png" id="9_n4xkg"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_5u1bq"]
 shader = ExtResource("3_3ph76")
@@ -13,9 +17,41 @@ shader_parameter/color = Color(1, 1, 1, 1)
 [sub_resource type="LabelSettings" id="LabelSettings_ewkhg"]
 font_size = 12
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_c2uty"]
+shader = ExtResource("3_3ph76")
+shader_parameter/color = Color(1, 1, 1, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_xwcqg"]
+font_size = 28
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_iwx1o"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_fxfru"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_apwo7"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_x601l"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_2fr18"]
+
+[sub_resource type="Theme" id="Theme_ja1jk"]
+Button/fonts/font = ExtResource("7_yl6nr")
+Button/styles/disabled = SubResource("StyleBoxEmpty_iwx1o")
+Button/styles/focus = SubResource("StyleBoxEmpty_fxfru")
+Button/styles/hover = SubResource("StyleBoxEmpty_apwo7")
+Button/styles/normal = SubResource("StyleBoxEmpty_x601l")
+Button/styles/pressed = SubResource("StyleBoxEmpty_2fr18")
+
+[sub_resource type="LabelSettings" id="LabelSettings_3gim2"]
+font_size = 36
+
+[sub_resource type="Theme" id="Theme_0x70m"]
+Button/font_sizes/font_size = 20
+
 [node name="UI Canvas" type="CanvasLayer"]
 
-[node name="UI" type="Control" parent="."]
+[node name="UI" type="Control" parent="." node_paths=PackedStringArray("powerSourceBar")]
+process_mode = 3
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -23,31 +59,18 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_jdr6r")
+powerSourceBar = [NodePath("MainUI/PowerSourceBar/Control3"), NodePath("MainUI/PowerSourceBar/Control2"), NodePath("MainUI/PowerSourceBar/Control")]
 
-[node name="TimerBar" type="ProgressBar" parent="UI"]
+[node name="MainUI" type="Control" parent="UI"]
+process_mode = 1
 layout_mode = 1
-anchors_preset = 6
-anchor_left = 1.0
-anchor_top = 0.5
+anchors_preset = 15
 anchor_right = 1.0
-anchor_bottom = 0.5
-offset_left = -40.0
-offset_top = -140.0
-offset_right = -24.0
-offset_bottom = 76.0
-grow_horizontal = 0
+anchor_bottom = 1.0
+grow_horizontal = 2
 grow_vertical = 2
-theme = ExtResource("2_7ugwh")
-max_value = 20.0
-value = 10.0
-fill_mode = 3
-show_percentage = false
 
-[node name="Timer" type="Timer" parent="UI/TimerBar"]
-wait_time = 20.0
-one_shot = true
-
-[node name="HealthBar" type="ProgressBar" parent="UI"]
+[node name="HealthBar" type="ProgressBar" parent="UI/MainUI"]
 layout_mode = 0
 offset_left = 72.0
 offset_top = 16.0
@@ -57,7 +80,7 @@ theme = ExtResource("2_7ugwh")
 max_value = 15.0
 show_percentage = false
 
-[node name="TextureRect" type="TextureRect" parent="UI"]
+[node name="TextureRect" type="TextureRect" parent="UI/MainUI"]
 material = SubResource("ShaderMaterial_5u1bq")
 layout_mode = 0
 offset_left = 16.0
@@ -67,7 +90,30 @@ offset_bottom = 40.0
 texture = ExtResource("4_qkryj")
 stretch_mode = 5
 
-[node name="Control" type="Control" parent="UI"]
+[node name="TimerBar" type="ProgressBar" parent="UI/MainUI"]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -40.0
+offset_top = -100.0
+offset_right = -24.0
+offset_bottom = 92.0
+grow_horizontal = 0
+grow_vertical = 2
+theme = ExtResource("2_7ugwh")
+max_value = 20.0
+value = 10.0
+fill_mode = 3
+show_percentage = false
+
+[node name="Timer" type="Timer" parent="UI/MainUI/TimerBar"]
+wait_time = 20.0
+one_shot = true
+
+[node name="Control" type="Control" parent="UI/MainUI"]
 layout_mode = 1
 anchors_preset = 6
 anchor_left = 1.0
@@ -75,27 +121,27 @@ anchor_top = 0.5
 anchor_right = 1.0
 anchor_bottom = 0.5
 offset_left = -32.0
-offset_top = 100.0
+offset_top = 116.0
 offset_right = -32.0
-offset_bottom = 100.0
+offset_bottom = 116.0
 grow_horizontal = 0
 grow_vertical = 2
 
-[node name="Sprite2D" type="Sprite2D" parent="UI/Control"]
+[node name="Sprite2D" type="Sprite2D" parent="UI/MainUI/Control"]
 texture = ExtResource("5_u85yt")
 region_enabled = true
 region_rect = Rect2(0, 0, 32, 32)
 
-[node name="ClockHand" type="Control" parent="UI/Control"]
+[node name="ClockHand" type="Control" parent="UI/MainUI/Control"]
 anchors_preset = 0
 
-[node name="Sprite2D2" type="Sprite2D" parent="UI/Control/ClockHand"]
+[node name="Sprite2D2" type="Sprite2D" parent="UI/MainUI/Control/ClockHand"]
 position = Vector2(0, -5)
 texture = ExtResource("5_u85yt")
 region_enabled = true
 region_rect = Rect2(33, 0, 4, 14)
 
-[node name="TimerText" type="Label" parent="UI"]
+[node name="TimerText" type="Label" parent="UI/MainUI"]
 layout_mode = 1
 anchors_preset = 6
 anchor_left = 1.0
@@ -103,9 +149,9 @@ anchor_top = 0.5
 anchor_right = 1.0
 anchor_bottom = 0.5
 offset_left = -48.0
-offset_top = 124.0
+offset_top = 140.0
 offset_right = -16.0
-offset_bottom = 147.0
+offset_bottom = 163.0
 grow_horizontal = 0
 grow_vertical = 2
 text = "20
@@ -113,4 +159,167 @@ text = "20
 label_settings = SubResource("LabelSettings_ewkhg")
 horizontal_alignment = 1
 
-[connection signal="timeout" from="UI/TimerBar/Timer" to="UI" method="_on_timer_timeout"]
+[node name="PowerSourceBar" type="Control" parent="UI/MainUI"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Control" type="Control" parent="UI/MainUI/PowerSourceBar"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 24.0
+offset_top = -40.0
+offset_right = 24.0
+offset_bottom = -40.0
+grow_vertical = 0
+
+[node name="Sprite2D" type="Sprite2D" parent="UI/MainUI/PowerSourceBar/Control"]
+material = SubResource("ShaderMaterial_c2uty")
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("6_5vwjl")
+region_enabled = true
+region_rect = Rect2(259, 161, 42, 100)
+
+[node name="Control2" type="Control" parent="UI/MainUI/PowerSourceBar"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 56.0
+offset_top = -40.0
+offset_right = 56.0
+offset_bottom = -40.0
+grow_vertical = 0
+
+[node name="Sprite2D" type="Sprite2D" parent="UI/MainUI/PowerSourceBar/Control2"]
+material = SubResource("ShaderMaterial_c2uty")
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("6_5vwjl")
+region_enabled = true
+region_rect = Rect2(259, 161, 42, 100)
+
+[node name="Control3" type="Control" parent="UI/MainUI/PowerSourceBar"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 88.0
+offset_top = -40.0
+offset_right = 88.0
+offset_bottom = -40.0
+grow_vertical = 0
+
+[node name="Sprite2D" type="Sprite2D" parent="UI/MainUI/PowerSourceBar/Control3"]
+material = SubResource("ShaderMaterial_c2uty")
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("6_5vwjl")
+region_enabled = true
+region_rect = Rect2(259, 161, 42, 100)
+
+[node name="DropBombWarning" type="Label" parent="UI/MainUI"]
+visible = false
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -192.0
+offset_top = -129.0
+offset_right = 192.0
+offset_bottom = -72.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "Drop The Bomb Now!"
+label_settings = SubResource("LabelSettings_xwcqg")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="PauseButton" type="Button" parent="UI/MainUI"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -48.0
+offset_top = 16.0
+offset_right = -16.0
+offset_bottom = 48.0
+grow_horizontal = 0
+theme = SubResource("Theme_ja1jk")
+icon = ExtResource("8_mmmr1")
+icon_alignment = 1
+expand_icon = true
+
+[node name="PauseUI" type="Control" parent="UI"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TextureRect" type="TextureRect" parent="UI/PauseUI"]
+modulate = Color(0, 0, 0, 0.501961)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("9_n4xkg")
+
+[node name="Label" type="Label" parent="UI/PauseUI"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -192.0
+offset_top = 14.0
+offset_right = 192.0
+offset_bottom = 64.0
+grow_horizontal = 2
+text = "Paused"
+label_settings = SubResource("LabelSettings_3gim2")
+horizontal_alignment = 1
+
+[node name="Resume" type="Button" parent="UI/PauseUI"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -96.0
+offset_top = -14.0
+offset_right = 96.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_0x70m")
+text = "Resume"
+
+[node name="MainMenu" type="Button" parent="UI/PauseUI"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -96.0
+offset_top = 36.0
+offset_right = 96.0
+offset_bottom = 70.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_0x70m")
+text = "Main Menu"
+
+[connection signal="timeout" from="UI/MainUI/TimerBar/Timer" to="UI" method="_on_timer_timeout"]
+[connection signal="button_down" from="UI/MainUI/PauseButton" to="UI" method="_on_pause_button_button_down"]
+[connection signal="button_down" from="UI/PauseUI/Resume" to="UI" method="_on_resume_button_down"]

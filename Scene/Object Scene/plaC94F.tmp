@@ -50,7 +50,7 @@ animations = [{
 }]
 
 [node name="Player" type="RigidBody2D" groups=["Player"]]
-process_mode = 1
+process_mode = 3
 process_priority = -1
 physics_material_override = SubResource("PhysicsMaterial_jvl48")
 gravity_scale = 0.0

@@ -20,11 +20,11 @@ var _bombDrop := true
 var _gameOver := true
 
 @onready var bullet_spawner: Marker2D = $BulletSpawner
-@onready var player_sprite: Sprite2D = $Player
 @onready var player_sfx: AudioStreamPlayer = $"../BGM/PlayerSFX"
 @onready var player_collider: CollisionShape2D = $"Player Collider"
 @onready var global_setting: GlobalSetting = $"../GlobalSetting"
 @onready var glow: Sprite2D = $Glow
+@onready var animation: AnimatedSprite2D = $AnimatedSprite2D
 
 func _process(delta):
 	if not global_setting.play:
@@ -46,7 +46,7 @@ func _process(delta):
 		elif _bombDrop:
 			if global_setting.timeEnd:
 				if _gameOver:
-					game_over()
+					game_over(2.5)
 					glow.visible = true
 					_gameOver = false
 				
@@ -59,7 +59,7 @@ func _process(delta):
 			apply_central_force(moveInput * playerMoveSpeed)
 			
 			_direction = 1 if moveInput.x >= 0 else -1
-			player_sprite.flip_h = true if moveInput.x < 0 else false
+			animation.flip_h = true if moveInput.x < 0 else false
 	
 	bullet_spawner.rotation_degrees = (90.0 - 70.0 * _direction)
 	bullet_spawner.position.x = 16.0 * _direction
@@ -99,15 +99,15 @@ func shoot():
 	player_sfx.play()
 
 
-func game_over():
-	player_sprite.visible = false
+func game_over(delay: float = 1.0):
+	animation.visible = false
 	player_collider.disabled = true
 	
 	var explosion: CPUParticles2D = explosionScene.instantiate()
 	explosion.global_position = global_position
 	get_tree().root.get_child(0).add_child(explosion)
 	
-	await get_tree().create_timer(1.0).timeout
+	await get_tree().create_timer(delay).timeout
 	
 	get_tree().reload_current_scene()
 
