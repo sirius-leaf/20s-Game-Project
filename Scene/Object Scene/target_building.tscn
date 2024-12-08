@@ -1,13 +1,25 @@
-[gd_scene load_steps=5 format=3 uid="uid://dtqhi113mbsae"]
+[gd_scene load_steps=10 format=3 uid="uid://dtqhi113mbsae"]
 
 [ext_resource type="Script" path="res://Script/target_building.gd" id="1_4kiv7"]
 [ext_resource type="Texture2D" uid="uid://bcdl5ylhwo084" path="res://Asset/Sprite/Buildings.png" id="1_bn0kp"]
+[ext_resource type="Texture2D" uid="uid://lbt3g2eokvwv" path="res://Asset/Sprite/Target_Defense.png" id="3_k7xs4"]
+[ext_resource type="AudioStream" uid="uid://bdgfn6prjnwy6" path="res://Asset/Sound Effect/Big_Laser.ogg" id="4_oh48v"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_sgflv"]
 size = Vector2(320, 128)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_f07vk"]
-size = Vector2(256, 880)
+size = Vector2(224, 880)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0oxb2"]
+size = Vector2(32, 64)
+
+[sub_resource type="Curve" id="Curve_ir03i"]
+_data = [Vector2(0, 0.25), 0.0, 0.0, 0, 0, Vector2(0.998, 2), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8f5av"]
+size = Vector2(8, 944)
 
 [node name="TargetBuilding" type="StaticBody2D" groups=["Target"]]
 collision_layer = 7
@@ -16,20 +28,47 @@ script = ExtResource("1_4kiv7")
 
 [node name="JustABox" type="Sprite2D" parent="."]
 z_index = 1
-position = Vector2(164, -66)
+position = Vector2(224, -65)
 texture = ExtResource("1_bn0kp")
 region_enabled = true
 region_rect = Rect2(0, 393, 330, 134)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(160, -64)
+position = Vector2(224, -64)
 shape = SubResource("RectangleShape2D_sgflv")
 
 [node name="Area2D" type="Area2D" parent="." groups=["Target"]]
+position = Vector2(63, 0)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 position = Vector2(160, -568)
 shape = SubResource("RectangleShape2D_f07vk")
 
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="."]
+position = Vector2(16, -32)
+shape = SubResource("RectangleShape2D_0oxb2")
+
+[node name="Line2D" type="Line2D" parent="."]
+modulate = Color(2.1, 1.2, 0.75, 1)
+position = Vector2(16, -8)
+points = PackedVector2Array(0, 0, 0, -1000)
+width = 0.0
+width_curve = SubResource("Curve_ir03i")
+
+[node name="TargetDefense" type="Sprite2D" parent="."]
+z_index = 1
+position = Vector2(16, -32)
+texture = ExtResource("3_k7xs4")
+
+[node name="Defense" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Defense"]
+position = Vector2(20, -536)
+shape = SubResource("RectangleShape2D_8f5av")
+
+[node name="BigLaser" type="AudioStreamPlayer" parent="Defense"]
+stream = ExtResource("4_oh48v")
+
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
 [connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_exited"]
+[connection signal="body_entered" from="Defense" to="." method="_on_defense_body_entered"]

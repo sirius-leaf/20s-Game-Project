@@ -1,7 +1,10 @@
-[gd_resource type="VisualShader" load_steps=2 format=3 uid="uid://b5xjbjfax6u1w"]
+[gd_resource type="VisualShader" load_steps=3 format=3 uid="uid://b5xjbjfax6u1w"]
 
 [sub_resource type="VisualShaderNodeColorConstant" id="VisualShaderNodeColorConstant_o4jkb"]
 constant = Color(1.5, 0.7, 0.45, 1)
+
+[sub_resource type="VisualShaderNodeInput" id="VisualShaderNodeInput_5kfeg"]
+input_name = "time"
 
 [resource]
 code = "shader_type canvas_item;
@@ -26,4 +29,6 @@ flags/light_only = false
 nodes/fragment/0/position = Vector2(340, 140)
 nodes/fragment/2/node = SubResource("VisualShaderNodeColorConstant_o4jkb")
 nodes/fragment/2/position = Vector2(80, 160)
+nodes/fragment/3/node = SubResource("VisualShaderNodeInput_5kfeg")
+nodes/fragment/3/position = Vector2(7, 263.5)
 nodes/fragment/connections = PackedInt32Array(2, 0, 0, 0)

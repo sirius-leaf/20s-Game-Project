@@ -1,10 +1,11 @@
-[gd_scene load_steps=8 format=3 uid="uid://cdp1ti4scnxv"]
+[gd_scene load_steps=9 format=3 uid="uid://cdp1ti4scnxv"]
 
 [ext_resource type="Script" path="res://Script/player.gd" id="1_bs74l"]
 [ext_resource type="PackedScene" uid="uid://cmh8hbudedayk" path="res://Scene/Object Scene/Bullet/player_bullet.tscn" id="2_afxx5"]
 [ext_resource type="PackedScene" uid="uid://bujormrrqpg3o" path="res://Scene/Object Scene/Particle/flying_object_explosion.tscn" id="3_fkkcv"]
 [ext_resource type="Texture2D" uid="uid://dw0l1q0h8fnqc" path="res://Asset/Sprite/Player.png" id="3_xbv5i"]
 [ext_resource type="PackedScene" uid="uid://m2dukvixydwn" path="res://Scene/Object Scene/player_bomb.tscn" id="4_uxakt"]
+[ext_resource type="Texture2D" uid="uid://oscg46mtyrfh" path="res://Asset/Sprite/Glow.png" id="6_52omc"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_jvl48"]
 friction = 0.0
@@ -42,6 +43,13 @@ autostart = true
 
 [node name="PlayerPos" type="Marker2D" parent="."]
 top_level = true
+
+[node name="Glow" type="Sprite2D" parent="."]
+visible = false
+modulate = Color(2.55, 1.5, 0.6, 1)
+z_index = 10
+scale = Vector2(0.1, 0.1)
+texture = ExtResource("6_52omc")
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="timeout" from="FireRate" to="." method="_on_fire_rate_timeout"]

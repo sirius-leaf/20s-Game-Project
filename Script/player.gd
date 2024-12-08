@@ -17,43 +17,51 @@ var _shoot := false
 var _direction := 1
 var _alive := true
 var _bombDrop := true
+var _gameOver := true
 
 @onready var bullet_spawner: Marker2D = $BulletSpawner
 @onready var player_sprite: Sprite2D = $Player
 @onready var player_sfx: AudioStreamPlayer = $"../BGM/PlayerSFX"
 @onready var player_collider: CollisionShape2D = $"Player Collider"
 @onready var global_setting: GlobalSetting = $"../GlobalSetting"
+@onready var glow: Sprite2D = $Glow
 
 func _process(delta):
-	var moveInput := Vector2(Input.get_axis("ui_left", "ui_right"),
-			Input.get_axis("ui_up", "ui_down"))
-	
 	if not global_setting.play:
-		if position.x >= -45:
+		if position.x >= -45.0:
 			constant_force.x = 0.0
 		
-		if position.y >= -20:
+		if position.y >= -20.0:
 			constant_force.y = 0.0
+	else:
+		var moveInput := Vector2(Input.get_axis("ui_left", "ui_right"),
+				Input.get_axis("ui_up", "ui_down"))
+		
+		if insideTarget:
+			if _bombDrop and powerSourceDestroyed >= 3 and Input.is_action_pressed("ui_select"):
+				drop_bomb()
+				move = false
+				constant_force = Vector2(2500.0, -1500.0)
+				_bombDrop = false
+		elif _bombDrop:
+			if global_setting.timeEnd:
+				if _gameOver:
+					game_over()
+					glow.visible = true
+					_gameOver = false
+				
+				glow.scale += Vector2(12.0, 12.0) * delta
+		
+		_shoot = true if (Input.is_key_pressed(KEY_SPACE) and _alive and move) else false
+		
+		# move the player
+		if moveInput and _alive and move:
+			apply_central_force(moveInput * playerMoveSpeed)
+			
+			_direction = 1 if moveInput.x >= 0 else -1
+			player_sprite.flip_h = true if moveInput.x < 0 else false
 	
 	bullet_spawner.rotation_degrees = (90.0 - 70.0 * _direction)
-	
-	if insideTarget:
-		if _bombDrop and powerSourceDestroyed >= 3 and Input.is_action_pressed("ui_select"):
-			drop_bomb()
-			move = false
-			constant_force = Vector2(2500.0, -1500.0)
-			_bombDrop = false
-	
-	_shoot = true if (Input.is_key_pressed(KEY_SPACE) and _alive and
-			global_setting.play and move) else false
-	
-	# move the player
-	if moveInput and _alive and global_setting.play and move:
-		apply_central_force(moveInput * playerMoveSpeed)
-		
-		_direction = 1 if moveInput.x >= 0 else -1
-		player_sprite.flip_h = true if moveInput.x < 0 else false
-	
 	bullet_spawner.position.x = 16.0 * _direction
 	
 	# restart scene

@@ -1,41 +1,116 @@
-[gd_scene load_steps=4 format=3 uid="uid://rfgu1kbc2oqs"]
+[gd_scene load_steps=8 format=3 uid="uid://rfgu1kbc2oqs"]
 
 [ext_resource type="Script" path="res://Script/ui.gd" id="1_jdr6r"]
+[ext_resource type="Theme" uid="uid://bpmonp6ff4uvc" path="res://Asset/UI Theme/Proggress Bar.tres" id="2_7ugwh"]
+[ext_resource type="Shader" path="res://Shader/fill_color.gdshader" id="3_3ph76"]
+[ext_resource type="Texture2D" uid="uid://dw0l1q0h8fnqc" path="res://Asset/Sprite/Player.png" id="4_qkryj"]
+[ext_resource type="Texture2D" uid="uid://bqo34yooovifc" path="res://Asset/Sprite/Tak berjudul1094_20241208125444.png" id="5_u85yt"]
 
-[sub_resource type="LabelSettings" id="LabelSettings_nays6"]
-font_size = 72
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_5u1bq"]
+shader = ExtResource("3_3ph76")
+shader_parameter/color = Color(1, 1, 1, 1)
 
-[sub_resource type="LabelSettings" id="LabelSettings_pipp6"]
-font_size = 36
+[sub_resource type="LabelSettings" id="LabelSettings_ewkhg"]
+font_size = 12
 
 [node name="UI Canvas" type="CanvasLayer"]
 
 [node name="UI" type="Control" parent="."]
 layout_mode = 3
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 script = ExtResource("1_jdr6r")
 
-[node name="Timer Label" type="Label" parent="UI"]
-layout_mode = 0
-offset_left = 16.0
-offset_top = 16.0
-offset_right = 744.0
-offset_bottom = 128.0
-text = "20
-"
-label_settings = SubResource("LabelSettings_nays6")
+[node name="TimerBar" type="ProgressBar" parent="UI"]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -40.0
+offset_top = -140.0
+offset_right = -24.0
+offset_bottom = 76.0
+grow_horizontal = 0
+grow_vertical = 2
+theme = ExtResource("2_7ugwh")
+max_value = 20.0
+value = 10.0
+fill_mode = 3
+show_percentage = false
 
-[node name="Timer" type="Timer" parent="UI/Timer Label"]
+[node name="Timer" type="Timer" parent="UI/TimerBar"]
 wait_time = 20.0
 one_shot = true
 
-[node name="Health Label" type="Label" parent="UI"]
+[node name="HealthBar" type="ProgressBar" parent="UI"]
 layout_mode = 0
-offset_left = 24.0
-offset_top = 128.0
-offset_right = 210.0
-offset_bottom = 178.0
-text = "Health : 20"
-label_settings = SubResource("LabelSettings_pipp6")
+offset_left = 72.0
+offset_top = 16.0
+offset_right = 328.0
+offset_bottom = 40.0
+theme = ExtResource("2_7ugwh")
+max_value = 15.0
+show_percentage = false
+
+[node name="TextureRect" type="TextureRect" parent="UI"]
+material = SubResource("ShaderMaterial_5u1bq")
+layout_mode = 0
+offset_left = 16.0
+offset_top = 16.0
+offset_right = 64.0
+offset_bottom = 40.0
+texture = ExtResource("4_qkryj")
+stretch_mode = 5
+
+[node name="Control" type="Control" parent="UI"]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -32.0
+offset_top = 100.0
+offset_right = -32.0
+offset_bottom = 100.0
+grow_horizontal = 0
+grow_vertical = 2
+
+[node name="Sprite2D" type="Sprite2D" parent="UI/Control"]
+texture = ExtResource("5_u85yt")
+region_enabled = true
+region_rect = Rect2(0, 0, 32, 32)
+
+[node name="ClockHand" type="Control" parent="UI/Control"]
+anchors_preset = 0
+
+[node name="Sprite2D2" type="Sprite2D" parent="UI/Control/ClockHand"]
+position = Vector2(0, -5)
+texture = ExtResource("5_u85yt")
+region_enabled = true
+region_rect = Rect2(33, 0, 4, 14)
+
+[node name="TimerText" type="Label" parent="UI"]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -48.0
+offset_top = 124.0
+offset_right = -16.0
+offset_bottom = 147.0
+grow_horizontal = 0
+grow_vertical = 2
+text = "20
+"
+label_settings = SubResource("LabelSettings_ewkhg")
+horizontal_alignment = 1
+
+[connection signal="timeout" from="UI/TimerBar/Timer" to="UI" method="_on_timer_timeout"]
