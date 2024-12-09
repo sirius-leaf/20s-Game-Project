@@ -46,11 +46,14 @@ func _process(delta):
 		elif _bombDrop:
 			if global_setting.timeEnd:
 				if _gameOver:
-					game_over(2.5)
+					game_over(2.5, true)
 					glow.visible = true
 					_gameOver = false
 				
 				glow.scale += Vector2(12.0, 12.0) * delta
+		elif not _bombDrop and global_setting.timeEnd and _gameOver:
+			win()
+			_gameOver = false
 		
 		_shoot = true if (Input.is_key_pressed(KEY_SPACE) and _alive and move) else false
 		
@@ -81,10 +84,6 @@ func _on_fire_rate_timeout():
 		shoot()
 
 
-func _on_body_entered(body):
-	if body.is_in_group("Target"): print("sfdjkdsfjkdsfjkhl")
-
-
 func ReduceHealth(damage: int):
 	healthValue -= damage
 
@@ -94,25 +93,36 @@ func shoot():
 	bullet.global_position = bullet_spawner.global_position
 	bullet.global_rotation_degrees = bullet_spawner.global_rotation_degrees + \
 			_rng.randf_range(-3.0, 3.0)
-	get_tree().root.get_child(0).add_child(bullet)
+	get_tree().root.get_child(1).add_child(bullet)
 	player_sfx.pitch_scale = _rng.randf_range(0.9, 1.1)
 	player_sfx.play()
 
 
-func game_over(delay: float = 1.0):
+func game_over(delay: float = 1.0, missionFail: bool = false):
 	animation.visible = false
 	player_collider.disabled = true
 	
 	var explosion: CPUParticles2D = explosionScene.instantiate()
 	explosion.global_position = global_position
-	get_tree().root.get_child(0).add_child(explosion)
+	get_tree().root.get_child(1).add_child(explosion)
 	
 	await get_tree().create_timer(delay).timeout
 	
-	get_tree().reload_current_scene()
+	if missionFail:
+		GlobalSet.playerIsWin = false
+		get_tree().change_scene_to_file("res://Scene/Level Scene/win_scene.tscn")
+	else:
+		get_tree().reload_current_scene()
 
 
 func drop_bomb():
 	var bomb: RigidBody2D = bombScene.instantiate()
 	bomb.global_position = global_position
-	get_tree().root.get_child(0).add_child(bomb)
+	get_tree().root.get_child(1).add_child(bomb)
+
+
+func win() -> void:
+	await get_tree().create_timer(2.5).timeout
+	
+	GlobalSet.playerIsWin = true
+	get_tree().change_scene_to_file("res://Scene/Level Scene/win_scene.tscn")

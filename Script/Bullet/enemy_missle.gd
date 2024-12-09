@@ -48,4 +48,4 @@ func _on_life_time_timeout():
 func spawn_explosion_particle():
 	var particle: CPUParticles2D = explosionParticle.instantiate()
 	particle.global_position = global_position
-	get_tree().root.get_child(0).add_child(particle)
+	get_tree().root.get_child(1).add_child(particle)

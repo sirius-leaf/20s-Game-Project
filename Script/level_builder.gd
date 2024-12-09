@@ -70,6 +70,6 @@ func build():
 		
 		_object.global_position = global_position
 	
-	get_tree().root.get_child(0).add_child(_object)
+	get_tree().root.get_child(1).add_child(_object)
 	
 	global_position.x += 70 + moveOffset + _rng.randf_range(0.0, _objectSpawnOffset)

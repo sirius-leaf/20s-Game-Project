@@ -30,10 +30,10 @@ func _ready():
 	_rng.randomize()
 	
 	if enemyType == Type.EXPLODE:
-		fire_rate.wait_time = 0.5 if global_setting.ChaosMode else 1.0
+		fire_rate.wait_time = 0.5 if GlobalSet.ChaosMode else 1.0
 		sprite.material.set_shader_parameter("active", 0.0)
 	else:
-		fire_rate.wait_time = 0.2 if global_setting.ChaosMode else 0.3
+		fire_rate.wait_time = 0.2 if GlobalSet.ChaosMode else 0.3
 
 
 func _process(delta):
@@ -100,10 +100,10 @@ func shoot():
 	bullet.global_position = bullet_spawner.global_position
 	bullet.global_rotation_degrees = bullet_spawner.global_rotation_degrees \
 			+ _rng.randf_range(-3.0, 3.0)
-	get_tree().root.get_child(0).add_child(bullet)
+	get_tree().root.get_child(1).add_child(bullet)
 
 
 func spawn_particle():
 	var explosion: CPUParticles2D = explosionScene.instantiate()
 	explosion.global_position = global_position
-	get_tree().root.get_child(0).add_child(explosion)
+	get_tree().root.get_child(1).add_child(explosion)

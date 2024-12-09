@@ -1,0 +1,388 @@
+[gd_scene load_steps=20 format=3 uid="uid://dt28tkl58bn71"]
+
+[ext_resource type="Script" path="res://Script/main_menu_ui.gd" id="1_0557r"]
+[ext_resource type="Script" path="res://Script/global_setting.gd" id="1_jvwd6"]
+[ext_resource type="Texture2D" uid="uid://d2b0sc40y3hsr" path="res://Asset/Sprite/Just a box.png" id="1_oabch"]
+[ext_resource type="PackedScene" uid="uid://xm5ntgfadppk" path="res://Scene/Level Scene/level.tscn" id="2_11wow"]
+[ext_resource type="Script" path="res://Script/main_menu_cam.gd" id="2_apcgp"]
+[ext_resource type="Shader" path="res://Shader/background.gdshader" id="2_vjkfy"]
+[ext_resource type="Texture2D" uid="uid://mo28k8hmoux5" path="res://Asset/Sprite/Backgrounds.png" id="3_5x4bt"]
+[ext_resource type="Texture2D" uid="uid://d3e2qwwndyn3p" path="res://Asset/Sprite/PowerSourceSS.png" id="4_n8j68"]
+[ext_resource type="Texture2D" uid="uid://c83rtq3u8nmbb" path="res://Asset/Sprite/PowerSourceUISS.png" id="5_mpbyd"]
+[ext_resource type="Texture2D" uid="uid://mjkwwtsfdskm" path="res://Asset/Sprite/TargetBuildingSS.png" id="6_wssr1"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_ug5rb"]
+font_size = 40
+
+[sub_resource type="LabelSettings" id="LabelSettings_plbgh"]
+font_size = 12
+
+[sub_resource type="LabelSettings" id="LabelSettings_1c31i"]
+font_size = 36
+
+[sub_resource type="LabelSettings" id="LabelSettings_t3usb"]
+line_spacing = 1.0
+font_size = 10
+
+[sub_resource type="Theme" id="Theme_280ba"]
+Button/font_sizes/font_size = 20
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_2eatr"]
+shader = ExtResource("2_vjkfy")
+shader_parameter/colorMultiplier = Color(0.49, 0.468848, 0.4557, 1)
+shader_parameter/mixValue = 0.58
+shader_parameter/newColor = Color(0.21799, 0.270264, 0.427083, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_qqqn2"]
+shader = ExtResource("2_vjkfy")
+shader_parameter/colorMultiplier = Color(0.4, 0.382733, 0.372, 1)
+shader_parameter/mixValue = 0.38
+shader_parameter/newColor = Color(0.21799, 0.270264, 0.427083, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_kvrex"]
+shader = ExtResource("2_vjkfy")
+shader_parameter/colorMultiplier = Color(0.49, 0.468848, 0.4557, 1)
+shader_parameter/mixValue = 0.19
+shader_parameter/newColor = Color(0.21799, 0.270264, 0.427083, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_mtdmi"]
+shader = ExtResource("2_vjkfy")
+shader_parameter/colorMultiplier = Color(0.57, 0.545395, 0.5301, 1)
+shader_parameter/mixValue = 0.09
+shader_parameter/newColor = Color(0.21799, 0.270264, 0.427083, 1)
+
+[node name="MainMenu" type="Node2D"]
+
+[node name="GlobalSetting" type="Node" parent="."]
+script = ExtResource("1_jvwd6")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="MainMenuUI" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_0557r")
+gameScene = ExtResource("2_11wow")
+
+[node name="Start" type="Control" parent="CanvasLayer/MainMenuUI"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/MainMenuUI/Start"]
+visible = false
+modulate = Color(0, 0, 0, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_oabch")
+
+[node name="Title" type="Label" parent="CanvasLayer/MainMenuUI/Start"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -232.0
+offset_top = 16.0
+offset_right = 224.0
+offset_bottom = 80.0
+grow_horizontal = 2
+text = "RUSH BOMBER"
+label_settings = SubResource("LabelSettings_ug5rb")
+horizontal_alignment = 1
+uppercase = true
+
+[node name="PlayButton" type="Button" parent="CanvasLayer/MainMenuUI/Start"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -56.0
+offset_top = -12.0
+offset_right = 56.0
+offset_bottom = 28.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Play"
+
+[node name="HardMode" type="CheckBox" parent="CanvasLayer/MainMenuUI/Start"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -56.0
+offset_top = -36.0
+offset_right = -32.0
+offset_bottom = -12.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label2" type="Label" parent="CanvasLayer/MainMenuUI/Start/HardMode"]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_top = -12.0
+offset_right = 88.0
+offset_bottom = 12.0
+grow_horizontal = 0
+grow_vertical = 2
+text = "Hard Mode"
+label_settings = SubResource("LabelSettings_plbgh")
+vertical_alignment = 1
+
+[node name="QuitButton" type="Button" parent="CanvasLayer/MainMenuUI/Start"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -56.0
+offset_top = 36.0
+offset_right = 56.0
+offset_bottom = 76.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Quit
+"
+
+[node name="Mission" type="Control" parent="CanvasLayer/MainMenuUI"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="CanvasLayer/MainMenuUI/Mission"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -136.0
+offset_top = 16.0
+offset_right = 136.0
+offset_bottom = 64.0
+grow_horizontal = 2
+text = "mission"
+label_settings = SubResource("LabelSettings_1c31i")
+horizontal_alignment = 1
+uppercase = true
+
+[node name="MissionGuide" type="Control" parent="CanvasLayer/MainMenuUI/Mission"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/MainMenuUI/Mission/MissionGuide"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -216.0
+offset_top = -92.0
+offset_right = -120.0
+offset_bottom = 12.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("4_n8j68")
+expand_mode = 5
+stretch_mode = 5
+
+[node name="Label" type="Label" parent="CanvasLayer/MainMenuUI/Mission/MissionGuide/TextureRect"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -48.0
+offset_top = 8.0
+offset_right = 48.0
+offset_bottom = 72.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "First, you must destroy 3 power sources"
+label_settings = SubResource("LabelSettings_t3usb")
+horizontal_alignment = 1
+autowrap_mode = 2
+text_overrun_behavior = 3
+
+[node name="TextureRect2" type="TextureRect" parent="CanvasLayer/MainMenuUI/Mission/MissionGuide"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -72.0
+offset_top = -91.6641
+offset_right = 72.0
+offset_bottom = 11.6641
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("5_mpbyd")
+expand_mode = 5
+stretch_mode = 5
+
+[node name="Label2" type="Label" parent="CanvasLayer/MainMenuUI/Mission/MissionGuide/TextureRect2"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -72.0
+offset_top = 60.0
+offset_right = 72.0
+offset_bottom = 124.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "On the buttom left corner of the screen shows the amount of active power sources"
+label_settings = SubResource("LabelSettings_t3usb")
+horizontal_alignment = 1
+autowrap_mode = 2
+text_overrun_behavior = 3
+
+[node name="TextureRect3" type="TextureRect" parent="CanvasLayer/MainMenuUI/Mission/MissionGuide"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 120.0
+offset_top = -92.0
+offset_right = 232.0
+offset_bottom = 13.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("6_wssr1")
+expand_mode = 5
+stretch_mode = 5
+
+[node name="Label3" type="Label" parent="CanvasLayer/MainMenuUI/Mission/MissionGuide/TextureRect3"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -56.0
+offset_top = -1.0
+offset_right = 56.0
+offset_bottom = 87.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "After all power sources is destroyed you can drop the bomb on enemy base"
+label_settings = SubResource("LabelSettings_t3usb")
+horizontal_alignment = 1
+autowrap_mode = 2
+text_overrun_behavior = 3
+
+[node name="BackButton" type="Button" parent="CanvasLayer/MainMenuUI/Mission"]
+layout_mode = 0
+offset_left = 16.0
+offset_top = 16.0
+offset_right = 72.0
+offset_bottom = 45.0
+text = "Back"
+
+[node name="StartButton" type="Button" parent="CanvasLayer/MainMenuUI/Mission"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -72.0
+offset_top = -72.0
+offset_right = 72.0
+offset_bottom = -32.0
+grow_horizontal = 2
+grow_vertical = 0
+theme = SubResource("Theme_280ba")
+text = "Start"
+
+[node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(1.3, 1.3)
+script = ExtResource("2_apcgp")
+speed = 200.0
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
+modulate = Color(0.49, 0.468848, 0.4557, 1)
+motion_scale = Vector2(0.2, 0.2)
+motion_offset = Vector2(0, 125)
+motion_mirroring = Vector2(1280, 0)
+
+[node name="Buildings" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer"]
+material = SubResource("ShaderMaterial_2eatr")
+texture = ExtResource("3_5x4bt")
+region_enabled = true
+region_rect = Rect2(0, 0, 1280, 256)
+
+[node name="ParallaxLayer2" type="ParallaxLayer" parent="ParallaxBackground"]
+modulate = Color(0.45, 0.430575, 0.4185, 1)
+motion_scale = Vector2(0.3, 0.3)
+motion_offset = Vector2(0, 140)
+motion_mirroring = Vector2(1280, 0)
+
+[node name="Buildings" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer2"]
+material = SubResource("ShaderMaterial_qqqn2")
+texture = ExtResource("3_5x4bt")
+region_enabled = true
+region_rect = Rect2(0, 256, 1280, 256)
+
+[node name="ParallaxLayer3" type="ParallaxLayer" parent="ParallaxBackground"]
+modulate = Color(0.56, 0.535827, 0.5208, 1)
+motion_scale = Vector2(0.4, 0.4)
+motion_offset = Vector2(0, 140)
+motion_mirroring = Vector2(1280, 0)
+
+[node name="Buildings" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer3"]
+material = SubResource("ShaderMaterial_kvrex")
+texture = ExtResource("3_5x4bt")
+region_enabled = true
+region_rect = Rect2(0, 512, 1280, 256)
+
+[node name="ParallaxLayer4" type="ParallaxLayer" parent="ParallaxBackground"]
+modulate = Color(0.68, 0.65382, 0.6324, 1)
+motion_scale = Vector2(0.5, 0.5)
+motion_offset = Vector2(0, 110)
+motion_mirroring = Vector2(1280, 0)
+
+[node name="Buildings" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer4"]
+material = SubResource("ShaderMaterial_mtdmi")
+texture = ExtResource("3_5x4bt")
+region_enabled = true
+region_rect = Rect2(0, 768, 1280, 256)
+
+[connection signal="button_down" from="CanvasLayer/MainMenuUI/Start/PlayButton" to="CanvasLayer/MainMenuUI" method="_on_play_button_button_down"]
+[connection signal="button_down" from="CanvasLayer/MainMenuUI/Start/QuitButton" to="CanvasLayer/MainMenuUI" method="_on_quit_button_button_down"]
+[connection signal="button_down" from="CanvasLayer/MainMenuUI/Mission/BackButton" to="CanvasLayer/MainMenuUI" method="_on_back_button_button_down"]
+[connection signal="button_down" from="CanvasLayer/MainMenuUI/Mission/StartButton" to="CanvasLayer/MainMenuUI" method="_on_start_button_button_down"]

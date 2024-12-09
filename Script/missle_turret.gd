@@ -18,7 +18,7 @@ var _shootRangeMod: float
 @onready var global_setting: GlobalSetting = $"../GlobalSetting"
 
 func _ready():
-	var isChaosMode := global_setting.ChaosMode
+	var isChaosMode := GlobalSet.ChaosMode
 	_fireRateModifier = 1.0 if isChaosMode else 0.0
 	_shootRangeMod = 200.0 if isChaosMode else 0.0
 	
@@ -29,7 +29,7 @@ func _process(delta):
 	if health <= 0:
 		var explosion: CPUParticles2D = explosionScene.instantiate()
 		explosion.global_position = global_position
-		get_tree().root.get_child(0).add_child(explosion)
+		get_tree().root.get_child(1).add_child(explosion)
 		
 		$"../Player Camera".shakeMultiplier = 0.5
 		
@@ -52,6 +52,6 @@ func shoot():
 	_missle.global_position = missle_spawner.global_position
 	_missle.global_rotation = missle_spawner.global_rotation
 	
-	$"../".add_child(_missle)
+	get_tree().root.get_child(1).add_child(_missle)
 	
 	sfx.play()

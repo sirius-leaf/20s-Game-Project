@@ -16,4 +16,4 @@ func _on_body_entered(body):
 func spawn_small_particle():
 	var smallShockwave: CPUParticles2D = smallShockwaveScene.instantiate()
 	smallShockwave.global_position = global_position
-	get_tree().root.get_child(0).add_child(smallShockwave)
+	get_tree().root.get_child(1).add_child(smallShockwave)

@@ -12,5 +12,5 @@ func _ready():
 	
 	turret.global_position = global_position
 	
-	get_tree().root.get_child(0).add_child(turret)
+	get_tree().root.get_child(1).add_child(turret)
 	queue_free()

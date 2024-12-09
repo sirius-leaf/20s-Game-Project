@@ -1,0 +1,108 @@
+[gd_scene load_steps=7 format=3 uid="uid://byl18hl3kblys"]
+
+[ext_resource type="Texture2D" uid="uid://d2b0sc40y3hsr" path="res://Asset/Sprite/Just a box.png" id="1_j7hg3"]
+[ext_resource type="Script" path="res://Script/win_scene_ui.gd" id="1_smwdw"]
+[ext_resource type="PackedScene" uid="uid://xm5ntgfadppk" path="res://Scene/Level Scene/level.tscn" id="2_q6qgy"]
+[ext_resource type="PackedScene" uid="uid://dt28tkl58bn71" path="res://Scene/Level Scene/main_menu.tscn" id="3_n0dlg"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_uqoov"]
+font_size = 30
+
+[sub_resource type="LabelSettings" id="LabelSettings_qjvdu"]
+
+[node name="WinScene" type="Node2D"]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="WinSceneUI" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_smwdw")
+levelScene = ExtResource("2_q6qgy")
+mainMenuScene = ExtResource("3_n0dlg")
+
+[node name="Transition" type="TextureRect" parent="CanvasLayer/WinSceneUI"]
+z_index = 5
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_j7hg3")
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/WinSceneUI"]
+modulate = Color(0, 0, 0, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_j7hg3")
+
+[node name="MissionLabel" type="Label" parent="CanvasLayer/WinSceneUI"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -280.0
+offset_top = 16.0
+offset_right = 280.0
+offset_bottom = 56.0
+grow_horizontal = 2
+text = "Mission success"
+label_settings = SubResource("LabelSettings_uqoov")
+horizontal_alignment = 1
+uppercase = true
+
+[node name="StatusLabel" type="Label" parent="CanvasLayer/WinSceneUI"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -288.0
+offset_top = 64.0
+offset_right = 288.0
+offset_bottom = 96.0
+grow_horizontal = 2
+text = "The enemy base has been destroyed"
+label_settings = SubResource("LabelSettings_qjvdu")
+horizontal_alignment = 1
+
+[node name="PlayButton" type="Button" parent="CanvasLayer/WinSceneUI"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -64.0
+offset_top = -20.0
+offset_right = 64.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Play Again"
+
+[node name="MenuButton" type="Button" parent="CanvasLayer/WinSceneUI"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -64.0
+offset_top = 36.0
+offset_right = 64.0
+offset_bottom = 76.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Main Menu"
+
+[connection signal="button_down" from="CanvasLayer/WinSceneUI/PlayButton" to="CanvasLayer/WinSceneUI" method="_on_play_button_button_down"]
+[connection signal="button_down" from="CanvasLayer/WinSceneUI/MenuButton" to="CanvasLayer/WinSceneUI" method="_on_menu_button_button_down"]

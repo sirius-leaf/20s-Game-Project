@@ -10,10 +10,15 @@ config_version=5
 
 [application]
 
-config/name="20s Thingy"
-run/main_scene="res://Scene/Level Scene/level.tscn"
+config/name="Rush Bomber"
+config/version="1.0.0"
+run/main_scene="res://Scene/Level Scene/main_menu.tscn"
 config/features=PackedStringArray("4.3", "GL Compatibility")
-config/icon="res://icon.svg"
+config/icon="res://Asset/Sprite/Player.png"
+
+[autoload]
+
+GlobalSet="*res://Script/global_setting.gd"
 
 [display]
 

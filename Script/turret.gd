@@ -38,10 +38,10 @@ func _ready():
 	fire_rate.wait_time = fireRate
 	
 	if turretType == TurretTypeEnum.BULLET:
-		_shotDelayMod = 1.0 if global_setting.ChaosMode else 0.0
+		_shotDelayMod = 1.0 if GlobalSet.ChaosMode else 0.0
 		shot_controller.connect("timeout", _on_shot_controller_timeout)
 	else:
-		_shotDelayMod = 0.5 if global_setting.ChaosMode else 0.0
+		_shotDelayMod = 0.5 if GlobalSet.ChaosMode else 0.0
 
 
 func _process(delta):
@@ -62,7 +62,7 @@ func _process(delta):
 	if health <= 0:
 		var explosion: CPUParticles2D = explosionScene.instantiate()
 		explosion.global_position = global_position
-		get_tree().root.get_child(0).add_child(explosion)
+		get_tree().root.get_child(1).add_child(explosion)
 		
 		$"../Player Camera".shakeMultiplier = 0.5
 		
@@ -111,7 +111,7 @@ func Shoot():
 			deg_to_rad(_rng.randf_range(-shootAngleVariation,
 			shootAngleVariation))
 	
-	get_tree().root.get_child(0).add_child(_bullet)
+	get_tree().root.get_child(1).add_child(_bullet)
 	
 	laser.pitch_scale = _rng.randf_range(baseSfxPitch - 0.1, baseSfxPitch + 0.1)
 	laser.play()

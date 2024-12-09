@@ -46,10 +46,8 @@ func _process(delta: float) -> void:
 		match _mode:
 			1:
 				pause()
-				print("a")
 			-1:
 				play()
-				print("b")
 		_mode *= -1
 
 
@@ -64,6 +62,12 @@ func _on_pause_button_button_down() -> void:
 
 func _on_resume_button_down() -> void:
 	if get_tree().paused: play()
+
+
+func _on_main_menu_button_down() -> void:
+	get_tree().paused = false
+	get_tree().change_scene_to_file("res://Scene/Level Scene/main_menu.tscn")
+	print("ccc")
 
 
 func pause() -> void:
