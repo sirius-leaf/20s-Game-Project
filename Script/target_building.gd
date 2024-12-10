@@ -3,7 +3,7 @@ extends StaticBody2D
 @onready var laser: Line2D = $Line2D
 @onready var player_camera: Camera = $"../Player Camera"
 @onready var defense: Area2D = $Defense
-@onready var player: Player = $"../Player"
+@onready var player: Player_ = $"../Player"
 @onready var big_laser: AudioStreamPlayer = $Defense/BigLaser
 
 func _process(delta: float) -> void:

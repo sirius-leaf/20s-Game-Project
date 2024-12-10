@@ -6,7 +6,7 @@ extends "res://Script/Bullet/bullet.gd"
 var _queue: Array
 var _trailLength := 10
 
-@onready var player: RigidBody2D = $"../Player"
+@onready var player: Player_ = $"../Player"
 @onready var direction_guide: Node2D = $"Direction Guide"
 @onready var trail: Line2D = $Trail
 @onready var trail_origin: Marker2D = $TrailOrigin

@@ -5,7 +5,7 @@ extends Control
 var _timerStart := true
 var _mode: int = 1
 
-@onready var player: Player = $"../../Player"
+@onready var player: Player_ = $"../../Player"
 @onready var global_setting: GlobalSetting = $"../../GlobalSetting"
 @onready var timer: Timer = $MainUI/TimerBar/Timer
 @onready var timer_bar: ProgressBar = $MainUI/TimerBar

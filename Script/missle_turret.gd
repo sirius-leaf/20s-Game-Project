@@ -11,7 +11,7 @@ var _rng := RandomNumberGenerator.new()
 var _fireRateModifier: float
 var _shootRangeMod: float
 
-@onready var player: RigidBody2D = $"../Player"
+@onready var player: Player_ = $"../Player"
 @onready var missle_spawner = $"Missle Spawner"
 @onready var fire_rate = $FireRate
 @onready var sfx: AudioStreamPlayer2D = $MissleShot
