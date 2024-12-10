@@ -19,7 +19,7 @@ var _move := true
 var _explode := true
 
 @onready var enemy_body: RigidBody2D = $EnemyBody
-@onready var player: RigidBody2D = $"../Player"
+@onready var player: Player_ = $"../Player"
 @onready var area_2d: Area2D = $Area2D
 @onready var bullet_spawner: Marker2D = $EnemyBody/BulletSpawner
 @onready var fire_rate: Timer = $EnemyBody/FireRate

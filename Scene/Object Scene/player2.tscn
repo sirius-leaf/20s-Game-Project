@@ -1,0 +1,80 @@
+[gd_scene load_steps=11 format=3 uid="uid://bl1g12yqhd7rd"]
+
+[ext_resource type="Script" path="res://Script/player_2.gd" id="1_phm5q"]
+[ext_resource type="PackedScene" uid="uid://cmh8hbudedayk" path="res://Scene/Object Scene/Bullet/player_bullet.tscn" id="2_vjqug"]
+[ext_resource type="Texture2D" uid="uid://oscg46mtyrfh" path="res://Asset/Sprite/Glow.png" id="5_rw5f1"]
+[ext_resource type="Texture2D" uid="uid://u0uuivv1u3go" path="res://Asset/Sprite/Player_.png" id="6_mkc3p"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_1y7gb"]
+radius = 3.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1udsq"]
+atlas = ExtResource("6_mkc3p")
+region = Rect2(0, 0, 42, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2vdhx"]
+atlas = ExtResource("6_mkc3p")
+region = Rect2(0, 16, 42, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_djgbq"]
+atlas = ExtResource("6_mkc3p")
+region = Rect2(0, 32, 42, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ll30y"]
+atlas = ExtResource("6_mkc3p")
+region = Rect2(0, 48, 42, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_d2n0e"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1udsq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2vdhx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_djgbq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ll30y")
+}],
+"loop": true,
+"name": &"default",
+"speed": 30.0
+}]
+
+[node name="Player" type="CharacterBody2D" groups=["Player"]]
+process_mode = 1
+process_priority = -1
+script = ExtResource("1_phm5q")
+bulletScene = ExtResource("2_vjqug")
+
+[node name="Player Collider" type="CollisionShape2D" parent="."]
+position = Vector2(0, 2)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_1y7gb")
+
+[node name="BulletSpawner" type="Marker2D" parent="."]
+position = Vector2(16, 6)
+rotation = 0.349066
+
+[node name="FireRate" type="Timer" parent="."]
+wait_time = 0.1
+autostart = true
+
+[node name="PlayerPos" type="Marker2D" parent="."]
+top_level = true
+
+[node name="Glow" type="Sprite2D" parent="."]
+visible = false
+modulate = Color(2.55, 1.5, 0.6, 1)
+z_index = 10
+scale = Vector2(0.1, 0.1)
+texture = ExtResource("5_rw5f1")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_d2n0e")
+autoplay = "default"
+
+[connection signal="timeout" from="FireRate" to="." method="_on_fire_rate_timeout"]

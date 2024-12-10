@@ -13,7 +13,7 @@ var _powerSourceAmount := 0
 var _build := true
 var _objectSpawnOffset: float
 
-@onready var player: RigidBody2D = $"../Player"
+@onready var player: Player_ = $"../Player"
 @onready var global_setting: GlobalSetting = $"../GlobalSetting"
 
 func _ready() -> void:
@@ -21,7 +21,7 @@ func _ready() -> void:
 
 
 func _process(delta):
-	if global_position.x - player.global_position.x < 350.0 and _build:
+	if global_position.x - player.position.x < 350.0 and _build:
 		build()
 
 

@@ -11,13 +11,13 @@ var _shake2 := Vector2(0.0, 0.0)
 var _shake2Temp := Vector2(0.0, 0.0)
 var _zoomValue := Vector2(1.3, 1.3)
 
-@onready var player: Player = $"../Player"
+@onready var player: Player_ = $"../Player"
 @onready var global_setting: GlobalSetting = $"../GlobalSetting"
 
 func _process(delta: float) -> void:
 	if player.move:
 		if global_setting.play:
-			global_position = player.position + _shake + _shake2
+			global_position = player.global_position + _shake + _shake2
 	else:
 		_zoomValue = Vector2(2.0, 2.0)
 		var bomb = get_parent().get_node("PlayerBomb")

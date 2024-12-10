@@ -23,7 +23,7 @@ var _bullet
 var _shoot_state: int = 1
 var _shotDelayMod: float
 
-@onready var player: RigidBody2D = $"../Player"
+@onready var player: Player_ = $"../Player"
 @onready var gun: Node2D = $Gun
 @onready var bullet_spawner: Marker2D = $"Gun/Bullet Spawner"
 @onready var shot_controller: Timer = $"Shot Controller"
